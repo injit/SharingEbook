@@ -56,13 +56,11 @@ public class BookUploadform extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         BookAuthorTextField = new javax.swing.JTextField();
-        UploaderNameTextField = new javax.swing.JTextField();
         BookNameTextField = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         CancelButton = new javax.swing.JButton();
         BookBrowseButton = new javax.swing.JButton();
         BrowseCoverpageButton = new javax.swing.JButton();
-        UploaderNameLabel = new javax.swing.JLabel();
         UploadcoverPageLabel = new javax.swing.JLabel();
         UploadBookLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -72,6 +70,8 @@ public class BookUploadform extends javax.swing.JFrame {
         coverpagepathprint = new javax.swing.JLabel();
         coverpagepathprintLabel = new javax.swing.JLabel();
         bookpathprintlabel = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        UploaderNameTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -114,8 +114,6 @@ public class BookUploadform extends javax.swing.JFrame {
             }
         });
 
-        UploaderNameLabel.setText("User Name");
-
         UploadcoverPageLabel.setText("Upload CoverPage");
 
         UploadBookLabel.setText("Upload Book");
@@ -125,6 +123,8 @@ public class BookUploadform extends javax.swing.JFrame {
         jScrollPane1.setViewportView(BookSummaryTextArea);
 
         jLabel2.setText("Points deserve");
+
+        jLabel5.setText("User Name");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -142,10 +142,8 @@ public class BookUploadform extends javax.swing.JFrame {
                             .addComponent(UploadcoverPageLabel)
                             .addComponent(jLabel4)
                             .addComponent(jLabel3)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(UploaderNameLabel)
-                                .addGap(3, 3, 3))
-                            .addComponent(jLabel1))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel5))
                         .addGap(7, 7, 7)))
                 .addGap(86, 86, 86)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,12 +161,14 @@ public class BookUploadform extends javax.swing.JFrame {
                                 .addComponent(BrowseCoverpageButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(coverpagepathprintLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(BookNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(UploaderNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(BookNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(125, 125, 125))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(coverpagepathprint)
-                        .addGap(316, 316, 316))))
+                        .addGap(316, 316, 316))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(UploaderNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(423, 423, 423)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -181,8 +181,8 @@ public class BookUploadform extends javax.swing.JFrame {
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(UploaderNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(UploaderNameLabel))
+                    .addComponent(jLabel5)
+                    .addComponent(UploaderNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BookNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -239,7 +239,7 @@ public class BookUploadform extends javax.swing.JFrame {
         String B_name = BookNameTextField.getText();
         String A_name = BookAuthorTextField.getText();
         String B_summary = BookSummaryTextArea.getText();
-        String Uploadtext = UploaderNameTextField.getText();
+        //String Uploadtext = BookSummaryTextArea.getText();
         String uploader_name = UploaderNameTextField.getText();
         String requestedPoints = pointsTextField.getText();
         int point = Integer.parseInt(requestedPoints);
@@ -263,7 +263,7 @@ public class BookUploadform extends javax.swing.JFrame {
             stmt.setBinaryStream(6, Book_fis, (int) Book_image.length());
             stmt.setInt(7, point);
             //stmt.setInt(8, B_summary);
-            if (!B_name.isEmpty() && !A_name.isEmpty() && !B_summary.isEmpty() && !Uploadtext.isEmpty() && !uploader_name.isEmpty() && !Cover_filepath.equals("") && !Book_filepath.equals("") && !requestedPoints.isEmpty()) {
+            if (!B_name.isEmpty() && !A_name.isEmpty() && !B_summary.isEmpty()  && !uploader_name.isEmpty() && !Cover_filepath.equals("") && !Book_filepath.equals("") && !requestedPoints.isEmpty()) {
 
                 Statement User_Stmt = conn.createStatement();
                 String User_query = "Select bookname, author, uploader from PendingBook";
@@ -410,7 +410,6 @@ public class BookUploadform extends javax.swing.JFrame {
     private javax.swing.JButton CancelButton;
     private javax.swing.JLabel UploadBookLabel;
     private javax.swing.JLabel UploadcoverPageLabel;
-    private javax.swing.JLabel UploaderNameLabel;
     private javax.swing.JTextField UploaderNameTextField;
     private javax.swing.JLabel bookpathprintlabel;
     private javax.swing.JLabel coverpagepathprint;
@@ -419,6 +418,7 @@ public class BookUploadform extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

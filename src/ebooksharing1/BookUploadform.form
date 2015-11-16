@@ -60,11 +60,8 @@
                               <Component id="UploadcoverPageLabel" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="UploaderNameLabel" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                              </Group>
                               <Component id="jLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                       </Group>
@@ -88,13 +85,16 @@
                                   <Component id="coverpagepathprintLabel" min="-2" pref="436" max="-2" attributes="0"/>
                               </Group>
                               <Component id="BookNameTextField" alignment="0" min="-2" pref="179" max="-2" attributes="0"/>
-                              <Component id="UploaderNameTextField" alignment="0" min="-2" pref="179" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="coverpagepathprint" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="316" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="UploaderNameTextField" min="-2" pref="179" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -112,8 +112,8 @@
                   <Component id="jLabel7" min="-2" pref="22" max="-2" attributes="0"/>
                   <EmptySpace pref="29" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="UploaderNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="UploaderNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -184,8 +184,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="BookAuthorTextField">
         </Component>
-        <Component class="javax.swing.JTextField" name="UploaderNameTextField">
-        </Component>
         <Component class="javax.swing.JTextField" name="BookNameTextField">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
@@ -216,11 +214,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BrowseCoverpageButtonActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="UploaderNameLabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="User Name"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="UploadcoverPageLabel">
           <Properties>
@@ -259,6 +252,13 @@
         <Component class="javax.swing.JLabel" name="coverpagepathprintLabel">
         </Component>
         <Component class="javax.swing.JLabel" name="bookpathprintlabel">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel5">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="User Name"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="UploaderNameTextField">
         </Component>
       </SubComponents>
     </Container>
