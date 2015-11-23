@@ -333,8 +333,8 @@ public class BookUploadform extends javax.swing.JFrame {
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
         // TODO add your handling code here:
         cancel();
-        RegUserPage AH = new RegUserPage(status, username);
-        AH.setVisible(true);
+        //RegUserPage AH = new RegUserPage(status, username);
+       // AH.setVisible(true);
     }//GEN-LAST:event_CancelButtonActionPerformed
 
 

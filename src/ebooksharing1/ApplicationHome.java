@@ -131,9 +131,9 @@ public class ApplicationHome extends javax.swing.JFrame {
 
     private void UserLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserLoginActionPerformed
         // TODO add your handling code here:
-        UsersLoginform ULF = new UsersLoginform();
+        //UsersLoginform ULF = new UsersLoginform();
         cancel();
-        ULF.setVisible(true);
+        //ULF.setVisible(true);
         //cancel();
     }//GEN-LAST:event_UserLoginActionPerformed
 

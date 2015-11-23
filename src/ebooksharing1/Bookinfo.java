@@ -8,6 +8,7 @@ package ebooksharing1;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -37,10 +38,11 @@ import javax.swing.ImageIcon;
     @NamedQuery(name = "Bookinfo.findByAuthor", query = "SELECT b FROM Bookinfo b WHERE b.author = :author"),
     @NamedQuery(name = "Bookinfo.findBySummary", query = "SELECT b FROM Bookinfo b WHERE b.summary = :summary"),
     @NamedQuery(name = "Bookinfo.findByUploader", query = "SELECT b FROM Bookinfo b WHERE b.uploader = :uploader"),
-    @NamedQuery(name = "Bookinfo.findByAwardPoints", query = "SELECT b FROM Bookinfo b WHERE b.awardPoints = :awardPoints"),
-    @NamedQuery(name = "Bookinfo.findByReadingPoint", query = "SELECT b FROM Bookinfo b WHERE b.readingPoint = :readingPoint"),
-    @NamedQuery(name = "Bookinfo.findByReadCounts", query = "SELECT b FROM Bookinfo b WHERE b.readCounts = :readCounts"),
+    @NamedQuery(name = "Bookinfo.findByRewardPoints", query = "SELECT b FROM Bookinfo b WHERE b.rewardPoints = :rewardPoints"),
+    @NamedQuery(name = "Bookinfo.findByReadingPoints", query = "SELECT b FROM Bookinfo b WHERE b.readingPoints = :readingPoints"),
+    @NamedQuery(name = "Bookinfo.findByReadingCounts", query = "SELECT b FROM Bookinfo b WHERE b.readingCounts = :readingCounts"),
     @NamedQuery(name = "Bookinfo.findByLastDateRead", query = "SELECT b FROM Bookinfo b WHERE b.lastDateRead = :lastDateRead"),
+    @NamedQuery(name = "Bookinfo.findByReadingTotalDuration", query = "SELECT b FROM Bookinfo b WHERE b.readingTotalDuration = :readingTotalDuration"),
     @NamedQuery(name = "Bookinfo.findByRating", query = "SELECT b FROM Bookinfo b WHERE b.rating = :rating"),
     @NamedQuery(name = "Bookinfo.findByRatingCounts", query = "SELECT b FROM Bookinfo b WHERE b.ratingCounts = :ratingCounts")})
 public class Bookinfo implements Serializable {
@@ -51,72 +53,57 @@ public class Bookinfo implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "BOOKID")
-    private Short bookid;
-    @Basic(optional = false)
+    private Integer bookid;
     @Column(name = "BOOKNAME")
     private String bookname;
-    @Basic(optional = false)
     @Lob
     @Column(name = "COVER")
     private byte[] cover;
-    
+    //private Serializable cover;
+
     public ImageIcon getImage(){
-        return new ImageIcon(new ImageIcon(cover).getImage().getScaledInstance(100, 150, java.awt.Image.SCALE_SMOOTH));
-    }
+        return new ImageIcon(new ImageIcon(cover).getImage().getScaledInstance(100, 150, java.awt.Image.SCALE_SMOOTH));}
     @Column(name = "AUTHOR")
     private String author;
     @Column(name = "SUMMARY")
     private String summary;
-    @Basic(optional = false)
     @Lob
     @Column(name = "BOOKFILE")
+    //private Serializable bookfile;
     private byte[] bookfile;
-    
-//    public ImageIcon getImage(){
-//        return new ImageIcon(new ImageIcon(bookfile).getImage().getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH));
-//    }
-    @Basic(optional = false)
+
     @Column(name = "UPLOADER")
     private String uploader;
-    @Basic(optional = false)
-    @Column(name = "AWARD_POINTS")
-    private short awardPoints;
-    @Basic(optional = false)
-    @Column(name = "READING_POINT")
-    private short readingPoint;
-    @Column(name = "READ_COUNTS")
-    private Short readCounts;
+    @Column(name = "REWARD_POINTS")
+    private Short rewardPoints;
+    @Column(name = "READING_POINTS")
+    private Short readingPoints;
+    @Column(name = "READING_COUNTS")
+    private Short readingCounts;
     @Column(name = "LAST_DATE_READ")
     @Temporal(TemporalType.DATE)
     private Date lastDateRead;
+    @Column(name = "READING_TOTAL_DURATION")
+    private BigInteger readingTotalDuration;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "RATING")
-    private Short rating;
+    private Double rating;
     @Column(name = "RATING_COUNTS")
     private Short ratingCounts;
 
     public Bookinfo() {
     }
 
-    public Bookinfo(Short bookid) {
+    public Bookinfo(Integer bookid) {
         this.bookid = bookid;
     }
 
-    public Bookinfo(Short bookid, String bookname, byte[] cover, byte[] bookfile, String uploader, short awardPoints, short readingPoint) {
-        this.bookid = bookid;
-        this.bookname = bookname;
-        this.cover = cover;
-        this.bookfile = bookfile;
-        this.uploader = uploader;
-        this.awardPoints = awardPoints;
-        this.readingPoint = readingPoint;
-    }
-
-    public Short getBookid() {
+    public Integer getBookid() {
         return bookid;
     }
 
-    public void setBookid(Short bookid) {
-        Short oldBookid = this.bookid;
+    public void setBookid(Integer bookid) {
+        Integer oldBookid = this.bookid;
         this.bookid = bookid;
         changeSupport.firePropertyChange("bookid", oldBookid, bookid);
     }
@@ -130,8 +117,8 @@ public class Bookinfo implements Serializable {
         this.bookname = bookname;
         changeSupport.firePropertyChange("bookname", oldBookname, bookname);
     }
-
-    public Serializable getCover() {
+    //originally Serializable converted to byte[]
+    public byte[] getCover() {
         return cover;
     }
 
@@ -181,34 +168,34 @@ public class Bookinfo implements Serializable {
         changeSupport.firePropertyChange("uploader", oldUploader, uploader);
     }
 
-    public short getAwardPoints() {
-        return awardPoints;
+    public Short getRewardPoints() {
+        return rewardPoints;
     }
 
-    public void setAwardPoints(short awardPoints) {
-        short oldAwardPoints = this.awardPoints;
-        this.awardPoints = awardPoints;
-        changeSupport.firePropertyChange("awardPoints", oldAwardPoints, awardPoints);
+    public void setRewardPoints(Short rewardPoints) {
+        Short oldRewardPoints = this.rewardPoints;
+        this.rewardPoints = rewardPoints;
+        changeSupport.firePropertyChange("rewardPoints", oldRewardPoints, rewardPoints);
     }
 
-    public short getReadingPoint() {
-        return readingPoint;
+    public Short getReadingPoints() {
+        return readingPoints;
     }
 
-    public void setReadingPoint(short readingPoint) {
-        short oldReadingPoint = this.readingPoint;
-        this.readingPoint = readingPoint;
-        changeSupport.firePropertyChange("readingPoint", oldReadingPoint, readingPoint);
+    public void setReadingPoints(Short readingPoints) {
+        Short oldReadingPoints = this.readingPoints;
+        this.readingPoints = readingPoints;
+        changeSupport.firePropertyChange("readingPoints", oldReadingPoints, readingPoints);
     }
 
-    public Short getReadCounts() {
-        return readCounts;
+    public Short getReadingCounts() {
+        return readingCounts;
     }
 
-    public void setReadCounts(Short readCounts) {
-        Short oldReadCounts = this.readCounts;
-        this.readCounts = readCounts;
-        changeSupport.firePropertyChange("readCounts", oldReadCounts, readCounts);
+    public void setReadingCounts(Short readingCounts) {
+        Short oldReadingCounts = this.readingCounts;
+        this.readingCounts = readingCounts;
+        changeSupport.firePropertyChange("readingCounts", oldReadingCounts, readingCounts);
     }
 
     public Date getLastDateRead() {
@@ -221,12 +208,22 @@ public class Bookinfo implements Serializable {
         changeSupport.firePropertyChange("lastDateRead", oldLastDateRead, lastDateRead);
     }
 
-    public Short getRating() {
+    public BigInteger getReadingTotalDuration() {
+        return readingTotalDuration;
+    }
+
+    public void setReadingTotalDuration(BigInteger readingTotalDuration) {
+        BigInteger oldReadingTotalDuration = this.readingTotalDuration;
+        this.readingTotalDuration = readingTotalDuration;
+        changeSupport.firePropertyChange("readingTotalDuration", oldReadingTotalDuration, readingTotalDuration);
+    }
+
+    public Double getRating() {
         return rating;
     }
 
-    public void setRating(Short rating) {
-        Short oldRating = this.rating;
+    public void setRating(Double rating) {
+        Double oldRating = this.rating;
         this.rating = rating;
         changeSupport.firePropertyChange("rating", oldRating, rating);
     }

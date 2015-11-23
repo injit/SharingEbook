@@ -18,6 +18,7 @@ import net.proteanit.sql.DbUtils;
  * @author indrajit
  */
 public class VisitorPage extends javax.swing.JFrame {
+
     /**
      * Creates new form RegUserPage
      */
@@ -26,14 +27,15 @@ public class VisitorPage extends javax.swing.JFrame {
 //    }
     private static String username = "";
     private static String status = "";
-    public VisitorPage(String RUname, String status){
+
+    public VisitorPage(String RUname, String status) {
         this.username = RUname;
         this.status = status;
         initComponents();
-        UserNametobePosted.setText("Welcome "+username);
-        StatusLabel.setText("Status: "+status);
+        UserNametobePosted.setText("Welcome " + username);
+        StatusLabel.setText("Status: " + status);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,12 +49,25 @@ public class VisitorPage extends javax.swing.JFrame {
         UsersRegistrationPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("UsersRegistrationPU").createEntityManager();
         bookinfoQuery = java.beans.Beans.isDesignTime() ? null : UsersRegistrationPUEntityManager.createQuery("SELECT b FROM Bookinfo b");
         bookinfoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : bookinfoQuery.getResultList();
+        bookinfoQuery1 = java.beans.Beans.isDesignTime() ? null : UsersRegistrationPUEntityManager.createQuery("SELECT b FROM Bookinfo b");
+        bookinfoList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : bookinfoQuery1.getResultList();
+        bookinfoQuery2 = java.beans.Beans.isDesignTime() ? null : UsersRegistrationPUEntityManager.createQuery("SELECT b FROM Bookinfo b");
+        bookinfoList2 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : bookinfoQuery2.getResultList();
         jPanel1 = new javax.swing.JPanel();
         UserNametobePosted = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        Table = new javax.swing.JTable();
         StatusLabel = new javax.swing.JLabel();
         BooksListLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        RateSelectedBookButton = new javax.swing.JButton();
+        WriteReviewButton = new javax.swing.JButton();
+        ReadSelectedBookButton = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        SummaryTextArea = new javax.swing.JTextArea();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        ReviewDisplayTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -63,60 +78,138 @@ public class VisitorPage extends javax.swing.JFrame {
         UserNametobePosted.setFont(new java.awt.Font("Lao MN", 1, 18)); // NOI18N
         UserNametobePosted.setText("Wecome:");
 
-        Table.setRowHeight(200);
-
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, bookinfoList, Table);
-        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${image}"));
-        columnBinding.setColumnName("Cover");
-        columnBinding.setColumnClass(javax.swing.ImageIcon.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${bookname}"));
-        columnBinding.setColumnName("Bookname");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${author}"));
-        columnBinding.setColumnName("Author");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${summary}"));
-        columnBinding.setColumnName("Summary");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${uploader}"));
-        columnBinding.setColumnName("Uploader");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${readingPoint}"));
-        columnBinding.setColumnName("Reading Point");
-        columnBinding.setColumnClass(Short.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${rating}"));
-        columnBinding.setColumnName("Rating");
-        columnBinding.setColumnClass(Short.class);
-        bindingGroup.addBinding(jTableBinding);
-        jTableBinding.bind();
-        jScrollPane1.setViewportView(Table);
-
         StatusLabel.setFont(new java.awt.Font("Lao MN", 1, 18)); // NOI18N
         StatusLabel.setText("Status:");
 
         BooksListLabel.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         BooksListLabel.setText("List of books ");
 
+        jTable1.setRowHeight(200);
+
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, bookinfoList2, jTable1);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${bookid}"));
+        columnBinding.setColumnName("Bookid");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${image}"));
+        columnBinding.setColumnName("Cover");
+        columnBinding.setColumnClass(javax.swing.ImageIcon.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${bookname}"));
+        columnBinding.setColumnName("Bookname");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${author}"));
+        columnBinding.setColumnName("Author");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${uploader}"));
+        columnBinding.setColumnName("Uploader");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${readingPoints}"));
+        columnBinding.setColumnName("Reading Points");
+        columnBinding.setColumnClass(Short.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${readingTotalDuration}"));
+        columnBinding.setColumnName("Reading Total Duration");
+        columnBinding.setColumnClass(java.math.BigInteger.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${rating}"));
+        columnBinding.setColumnName("Rating");
+        columnBinding.setColumnClass(Double.class);
+        columnBinding.setEditable(false);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        jLabel12.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jLabel12.setText("Click on the Book on above tabel to check its review");
+
+        jLabel13.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jLabel13.setText("Summary");
+
+        RateSelectedBookButton.setText("Rate selected Book");
+        RateSelectedBookButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RateSelectedBookButtonActionPerformed(evt);
+            }
+        });
+
+        WriteReviewButton.setText("Write Review");
+        WriteReviewButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                WriteReviewButtonActionPerformed(evt);
+            }
+        });
+
+        ReadSelectedBookButton.setText("Read selected Book");
+        ReadSelectedBookButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReadSelectedBookButtonActionPerformed(evt);
+            }
+        });
+
+        SummaryTextArea.setColumns(20);
+        SummaryTextArea.setRows(5);
+        jScrollPane5.setViewportView(SummaryTextArea);
+
+        ReviewDisplayTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "BookID", "Reviewer", "Reviews", "Ratings"
+            }
+        ));
+        jScrollPane6.setViewportView(ReviewDisplayTable);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(BooksListLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(37, 939, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(UserNametobePosted, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(StatusLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(33, Short.MAX_VALUE))
+                        .addComponent(BooksListLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel13)
+                        .addGap(101, 101, 101))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel12)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 1107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 889, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(UserNametobePosted, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(StatusLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(43, 43, 43))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(51, 51, 51)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(RateSelectedBookButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(ReadSelectedBookButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(WriteReviewButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap(41, Short.MAX_VALUE))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,27 +218,49 @@ public class VisitorPage extends javax.swing.JFrame {
                 .addComponent(UserNametobePosted)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(StatusLabel)
-                .addGap(50, 50, 50)
-                .addComponent(BooksListLabel)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(ReadSelectedBookButton)
+                        .addGap(26, 26, 26)
+                        .addComponent(RateSelectedBookButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(WriteReviewButton))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(BooksListLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(471, 471, 471))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 1214, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 19, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 19, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 10, Short.MAX_VALUE))
+            .addGap(0, 893, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 893, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         bindingGroup.bind();
@@ -153,22 +268,94 @@ public class VisitorPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /*
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        books_row_detail();
+        populateReviewtable();
+        //jTable1.setEnabled(false);
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void RateSelectedBookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RateSelectedBookButtonActionPerformed
+        // TODO add your handling code here:
+         JOptionPane.showMessageDialog(null, "Sorry, You have no access!");
+    }//GEN-LAST:event_RateSelectedBookButtonActionPerformed
+
+    private void WriteReviewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WriteReviewButtonActionPerformed
+        // TODO add your handling code here:
+         JOptionPane.showMessageDialog(null, "Sorry, You have no access!");
+    }//GEN-LAST:event_WriteReviewButtonActionPerformed
+
+    private void ReadSelectedBookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReadSelectedBookButtonActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Sorry, You have no access!");
+    }//GEN-LAST:event_ReadSelectedBookButtonActionPerformed
+
+    //Helper functions
+
+
+    private void populateReviewtable() {
+        ResultSet rs = null;
+        PreparedStatement pst = null;
+
+        try {
             DbConnector dbc = new DbConnector();
-        Connection conn = dbc.Connects();
-        
-        try{
-            String qry = "Select cover, bookName, author, summary from BookInfo";
-            PreparedStatement stmt = conn.prepareStatement(qry);
-            ResultSet rs = stmt.executeQuery();
-            Table.setModel(DbUtils.resultSetToTableModel(rs));
-            
-        }catch(Exception e){
+            Connection conn = dbc.Connects();
+            int row = jTable1.getSelectedRow();
+            int rowNum = (int) jTable1.getModel().getValueAt(row, 0);
+            String Sql = "Select bookid AS BookID, username AS Reviewer, review_text AS Reviews, rating AS Ratings FROM Review_rating WHERE bookid = ?";
+            pst = conn.prepareStatement(Sql);
+            pst.setInt(1, rowNum);
+            rs = pst.executeQuery();
+            ReviewDisplayTable.setModel(DbUtils.resultSetToTableModel(rs));
+            ReviewDisplayTable.setEnabled(false);
+            conn.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
-    */
-    
-    
+    }
+
+    private void books_row_detail() {
+        ResultSet rs = null;
+        PreparedStatement pst = null;
+        SummaryTextArea.setText("");
+
+        try {
+            DbConnector dbc = new DbConnector();
+            Connection conn = dbc.Connects();
+            int row = jTable1.getSelectedRow();
+            int rowNum = (int) jTable1.getModel().getValueAt(row, 0);
+            String sql = "SELECT summary FROM BookInfo  where BookInfo.bookid = ?";
+            pst = conn.prepareStatement(sql);
+            pst.setInt(1, rowNum);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+
+                SummaryTextArea.setText(rs.getString("summary"));
+                SummaryTextArea.setEditable(false);
+                SummaryTextArea.setLineWrap(true);
+
+            }
+            conn.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    /*
+     DbConnector dbc = new DbConnector();
+     Connection conn = dbc.Connects();
+        
+     try{
+     String qry = "Select cover, bookName, author, summary from BookInfo";
+     PreparedStatement stmt = conn.prepareStatement(qry);
+     ResultSet rs = stmt.executeQuery();
+     Table.setModel(DbUtils.resultSetToTableModel(rs));
+            
+     }catch(Exception e){
+     e.printStackTrace();
+     }
+     */
+
     /**
      * @param args the command line arguments
      */
@@ -207,22 +394,35 @@ public class VisitorPage extends javax.swing.JFrame {
         });
 
     }
-        
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BooksListLabel;
+    private javax.swing.JButton RateSelectedBookButton;
+    private javax.swing.JButton ReadSelectedBookButton;
+    private javax.swing.JTable ReviewDisplayTable;
     private javax.swing.JLabel StatusLabel;
-    private javax.swing.JTable Table;
+    private javax.swing.JTextArea SummaryTextArea;
     private javax.swing.JLabel UserNametobePosted;
     private javax.persistence.EntityManager UsersRegistrationPUEntityManager;
+    private javax.swing.JButton WriteReviewButton;
     private java.util.List<ebooksharing1.Bookinfo> bookinfoList;
+    private java.util.List<ebooksharing1.Bookinfo> bookinfoList1;
+    private java.util.List<ebooksharing1.Bookinfo> bookinfoList2;
     private javax.persistence.Query bookinfoQuery;
+    private javax.persistence.Query bookinfoQuery1;
+    private javax.persistence.Query bookinfoQuery2;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JTable jTable1;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
-public void cancel() {
+    public void cancel() {
         WindowEvent winClosing = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosing);
     }
