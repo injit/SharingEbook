@@ -16,15 +16,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.JPanel;
-import javax.swing.MutableComboBoxModel;
 import net.proteanit.sql.DbUtils;
-import static sun.invoke.util.ValueConversions.box;
 
 /**
  *
@@ -655,10 +651,11 @@ public class tabpannedUserPage extends javax.swing.JFrame {
                                             .addComponent(BrowseCoverpageButton)
                                             .addComponent(UploadcoverPageLabel))
                                         .addGap(18, 18, 18)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(BookBrowseButton)
-                                            .addComponent(UploadBookLabel)
-                                            .addComponent(bookpathprintlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(bookpathprintlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(BookBrowseButton)
+                                                .addComponent(UploadBookLabel))))
                                     .addComponent(coverpagepathprintLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(262, 262, 262)
@@ -983,7 +980,35 @@ public class tabpannedUserPage extends javax.swing.JFrame {
 
     private void ReadSelectedBookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReadSelectedBookButtonActionPerformed
         // TODO add your handling code here:
-        passBookID();
+        ResultSet rs = null;
+        PreparedStatement pst = null;
+        try {
+            DbConnector dbc = new DbConnector();
+            Connection conn = dbc.Connects();
+            int user_point = 0;
+            //int row = SentMessageTable.getSelectedRow();
+            //int rowNum = (int) SentMessageTable.getModel().getValueAt(row, 0);
+            String sql = "SELECT point_balance FROM UserInfo  WHERE username = ?";
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, username);
+            rs = pst.executeQuery();
+            while(rs.next()){
+            user_point = rs.getInt("point_balance");
+            }
+            if(user_point>0){
+                passBookID();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Sorry You don't have enough points");
+            }
+            
+            conn.close();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        
 
     }//GEN-LAST:event_ReadSelectedBookButtonActionPerformed
     
