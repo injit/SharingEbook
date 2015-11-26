@@ -29,6 +29,7 @@ public class VisitorPage extends javax.swing.JFrame {
     private static String status = "";
 
     public VisitorPage(String RUname, String status) {
+        super("Visitor");
         this.username = RUname;
         this.status = status;
         initComponents();

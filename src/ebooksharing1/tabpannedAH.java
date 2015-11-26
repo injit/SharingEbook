@@ -23,6 +23,7 @@ public class tabpannedAH extends javax.swing.JFrame {
      * Creates new form tabpannedAH
      */
     public tabpannedAH() {
+        super("Application Home page");
         initComponents();
     }
 
