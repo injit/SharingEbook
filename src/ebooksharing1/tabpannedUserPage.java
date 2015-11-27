@@ -55,6 +55,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
         populateUserDetails();
         populateInvitationSentTable();
         populateInvitationReceivedTable();
+        populateReadBookTable();
     }
 
     private void setgreetings() {
@@ -112,6 +113,9 @@ public class tabpannedUserPage extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         UserTypeTextField = new javax.swing.JTextField();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        ReadBookTable = new javax.swing.JTable();
+        ReadBooksLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         BookSubmitButton = new javax.swing.JButton();
@@ -145,8 +149,8 @@ public class tabpannedUserPage extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         MessageSendButton = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox();
         ClearMessage = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox();
         jPanel5 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
@@ -380,6 +384,21 @@ public class tabpannedUserPage extends javax.swing.JFrame {
 
         jLabel22.setText("User Type");
 
+        ReadBookTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Book Id", "Time in sec"
+            }
+        ));
+        jScrollPane12.setViewportView(ReadBookTable);
+
+        ReadBooksLabel.setText("List of Books You Read");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -387,7 +406,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(350, 350, 350)
+                        .addGap(66, 66, 66)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel6)
                             .addComponent(LastNameLabel)
@@ -404,46 +423,59 @@ public class tabpannedUserPage extends javax.swing.JFrame {
                             .addComponent(FNameTextField)
                             .addComponent(UserTypeTextField)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(422, 422, 422)
-                        .addComponent(jLabel11))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(59, 59, 59)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel15)
                             .addComponent(jLabel10)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addComponent(jLabel11)))
+                .addGap(102, 102, 102)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel16)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(17, Short.MAX_VALUE))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ReadBooksLabel)
+                            .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jLabel11)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(ReadBooksLabel))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(FirstNameLabel)
-                    .addComponent(FNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LastNameLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(EmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PointEarnedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(gotComplaintTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(FirstNameLabel)
+                            .addComponent(FNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(LastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LastNameLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(EmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel8)
+                            .addComponent(PointEarnedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(gotComplaintTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9)))
+                    .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
                     .addComponent(UserTypeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -457,7 +489,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addGap(84, 84, 84))
         );
 
         UserProfileTab1.addTab("User Profile", jPanel4);
@@ -669,8 +701,9 @@ public class tabpannedUserPage extends javax.swing.JFrame {
         jScrollPane9.setViewportView(MessageTextArea);
 
         jLabel19.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-        jLabel19.setText("Write your message");
+        jLabel19.setText("Write message");
 
+        jLabel20.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel20.setText("To");
 
         MessageSendButton.setText("Send");
@@ -680,19 +713,14 @@ public class tabpannedUserPage extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "user1", "user2", "user3", "user4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-
         ClearMessage.setText("Clear Message Area");
         ClearMessage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ClearMessageActionPerformed(evt);
             }
         });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -715,14 +743,14 @@ public class tabpannedUserPage extends javax.swing.JFrame {
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel20)
                                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                                             .addComponent(ClearMessage)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(MessageSendButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 31, Short.MAX_VALUE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel5)
@@ -733,9 +761,9 @@ public class tabpannedUserPage extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(94, 94, 94)
                 .addComponent(jLabel19)
-                .addGap(22, 22, 22)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel20)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1183,14 +1211,10 @@ public class tabpannedUserPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_InboxTableRowMouseClicked
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
     private void ClearMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearMessageActionPerformed
         // TODO add your handling code here:
         MessageTextArea.setText("");
+        jComboBox1.setSelectedItem("Please Select...");
     }//GEN-LAST:event_ClearMessageActionPerformed
 
     private void MessageSendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MessageSendButtonActionPerformed
@@ -1209,7 +1233,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
         try {
             PreparedStatement stmt = conn.prepareStatement(Sql);
             //stmt.setString(1, uploader_name);
-            if (receiver.equals("Please Select...") || message.isEmpty()) {
+            if (receiver.equals("Please Select...") || message.isEmpty() ||message.equals("Write your message here")) {
                 JOptionPane.showMessageDialog(null, "Please Check the fields", "Input Error!", JOptionPane.WARNING_MESSAGE);
             } else {
                 stmt.setString(1, username);
@@ -1241,17 +1265,6 @@ public class tabpannedUserPage extends javax.swing.JFrame {
 
     }//GEN-LAST:event_InviteButton2ActionPerformed
 
-//    private void passBookID() {
-//        int row = jTable1.getSelectedRow();
-//        if (row != -1) {
-//            int bid = (int) jTable1.getModel().getValueAt(row, 0);
-//            BookOpened bo = new BookOpened(bid);
-//            bo.setVisible(true);
-//        } else {
-//            JOptionPane.showMessageDialog(null, "No book selected");
-//        }
-//
-//    }
 //Helper functions
     private int get_user_reading_duration() {
         ResultSet rs = null;
@@ -1368,7 +1381,24 @@ public class tabpannedUserPage extends javax.swing.JFrame {
         }
     }
     //BookPendingUserTable
+    private void populateReadBookTable(){
+        ResultSet rs = null;
+        PreparedStatement pst = null;
 
+        try {
+            DbConnector dbc = new DbConnector();
+            Connection conn = dbc.Connects();
+            String Sql = "Select BookID, Reading_duration AS Time_read_in_sec  FROM READINGHISTORY WHERE username = ?";
+            pst = conn.prepareStatement(Sql);
+            pst.setString(1, username);
+            rs = pst.executeQuery();
+            ReadBookTable.setModel(DbUtils.resultSetToTableModel(rs));
+            ReadBookTable.setEnabled(false);
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     private void populateInvitationSentTable() {
         ResultSet rs = null;
         PreparedStatement pst = null;
@@ -1382,16 +1412,6 @@ public class tabpannedUserPage extends javax.swing.JFrame {
             pst = conn.prepareStatement(Sql);
             pst.setString(1, username);
             rs = pst.executeQuery();
-//            String S_s = "Rejected";
-//            boolean s_s = false;
-//            while(rs.next()){
-//                  s_s  = rs.getBoolean("Shared_Status");//.getObject(accepted_invitation, s_s);
-//            if(s_s){
-//                S_s = "Accepted";
-//            }
-//            rs.updateString("Shared_Status", S_s);
-//            }
-            //rs.updateString(3, S_s);
             InvitationSentTable.setModel(DbUtils.resultSetToTableModel(rs));
             InvitationSentTable.setEnabled(false);
             conn.close();
@@ -1560,6 +1580,8 @@ public class tabpannedUserPage extends javax.swing.JFrame {
     private javax.swing.JTextArea MessageTextArea;
     private javax.swing.JTextField PointEarnedTextField;
     private javax.swing.JButton RateSelectedBookButton;
+    private javax.swing.JTable ReadBookTable;
+    private javax.swing.JLabel ReadBooksLabel;
     private javax.swing.JButton ReadSelectedBookButton;
     private javax.swing.JTable ReceivedMessage;
     private javax.swing.JTable ReviewDisplayTable;
@@ -1610,6 +1632,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
