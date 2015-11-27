@@ -7,6 +7,8 @@ package ebooksharing1;
 
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,6 +20,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
@@ -57,6 +60,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
     private void setgreetings() {
         UserNametobePosted.setText("Welcome " + username);
         StatusLabel.setText("Status: " + status);
+        messageBoxControl();
     }
 
     /**
@@ -79,14 +83,14 @@ public class tabpannedUserPage extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        BookRating = new javax.swing.JTextField();
         RateSelectedBookButton = new javax.swing.JButton();
         ReadSelectedBookButton = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         SummaryTextArea = new javax.swing.JTextArea();
+        InviteButton2 = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
         ReviewDisplayTable = new javax.swing.JTable();
+        UserNameComboBox = new javax.swing.JComboBox();
         jPanel4 = new javax.swing.JPanel();
         FirstNameLabel = new javax.swing.JLabel();
         LastNameLabel = new javax.swing.JLabel();
@@ -140,8 +144,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
         MessageTextArea = new javax.swing.JTextArea();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        InviteButton = new javax.swing.JButton();
-        jLabel21 = new javax.swing.JLabel();
+        MessageSendButton = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox();
         ClearMessage = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
@@ -215,9 +218,6 @@ public class tabpannedUserPage extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel13.setText("Summary");
 
-        jLabel14.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-        jLabel14.setText("Rating");
-
         RateSelectedBookButton.setText("Rate/Review Book");
         RateSelectedBookButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,26 +236,24 @@ public class tabpannedUserPage extends javax.swing.JFrame {
         SummaryTextArea.setRows(5);
         jScrollPane5.setViewportView(SummaryTextArea);
 
-        ReviewDisplayTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "BookID", "Reviewer", "Reviews", "Ratings"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        InviteButton2.setText("Invite to read book");
+        InviteButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InviteButton2ActionPerformed(evt);
             }
         });
+
+        ReviewDisplayTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
         jScrollPane6.setViewportView(ReviewDisplayTable);
+
+        UserNameComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -264,10 +262,14 @@ public class tabpannedUserPage extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 889, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12))
+                            .addComponent(jLabel12)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(UserNameComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(59, 59, 59)
+                                .addComponent(InviteButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13)
@@ -277,12 +279,8 @@ public class tabpannedUserPage extends javax.swing.JFrame {
                         .addGap(34, 34, 34))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel14)
-                                .addGap(18, 18, 18)
-                                .addComponent(BookRating, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 1107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BooksListLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(BooksListLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 1102, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -300,16 +298,16 @@ public class tabpannedUserPage extends javax.swing.JFrame {
                         .addComponent(ReadSelectedBookButton))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(RateSelectedBookButton)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(RateSelectedBookButton)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(InviteButton2)
+                        .addComponent(UserNameComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BookRating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14))
-                .addGap(413, 413, 413))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
 
         UserProfileTab1.addTab("Browse Book", jPanel1);
@@ -673,16 +671,14 @@ public class tabpannedUserPage extends javax.swing.JFrame {
         jLabel19.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel19.setText("Write your message");
 
-        jLabel20.setText("Invite");
+        jLabel20.setText("To");
 
-        InviteButton.setText("Invite to read book");
-        InviteButton.addActionListener(new java.awt.event.ActionListener() {
+        MessageSendButton.setText("Send");
+        MessageSendButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                InviteButtonActionPerformed(evt);
+                MessageSendButtonActionPerformed(evt);
             }
         });
-
-        jLabel21.setText("Message Area");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "user1", "user2", "user3", "user4" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -715,28 +711,40 @@ public class tabpannedUserPage extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                                            .addComponent(jLabel20)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(InviteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(ClearMessage, javax.swing.GroupLayout.Alignment.LEADING))
-                                    .addComponent(jLabel21))
-                                .addGap(0, 31, Short.MAX_VALUE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel19)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel20)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                            .addComponent(ClearMessage)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(MessageSendButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 31, Short.MAX_VALUE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 937, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(94, 94, 94)
+                .addComponent(jLabel19)
+                .addGap(22, 22, 22)
+                .addComponent(jLabel20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ClearMessage)
+                    .addComponent(MessageSendButton))
+                .addGap(170, 170, 170))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(jLabel5)
                 .addGap(19, 19, 19)
@@ -746,23 +754,8 @@ public class tabpannedUserPage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addGap(335, 335, 335))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(94, 94, 94)
-                .addComponent(jLabel19)
-                .addGap(17, 17, 17)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel20)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(InviteButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel21)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(ClearMessage)
-                .addGap(334, 334, 334))
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         UserProfileTab1.addTab("Messages", jPanel3);
@@ -805,7 +798,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+            .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(68, 68, 68)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel23)
@@ -911,6 +904,16 @@ public class tabpannedUserPage extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_BookSubmitButtonActionPerformed
+
+    private void messageBoxControl() {
+        MessageTextArea.setText("Write your message here");
+        MessageTextArea.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                MessageTextArea.setText("");
+            }
+        });
+    }
 
     private void submit() {
         String B_name = BookNameTextField.getText();
@@ -1098,6 +1101,12 @@ public class tabpannedUserPage extends javax.swing.JFrame {
 
     private void RateSelectedBookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RateSelectedBookButtonActionPerformed
         // TODO add your handling code here:
+        
+        /*
+        public ImageIcon getImage(){
+        return new ImageIcon(new ImageIcon(cover).getImage().getScaledInstance(100, 150, java.awt.Image.SCALE_SMOOTH));}
+        */
+                
         int row = jTable1.getSelectedRow();
         if (row != -1) {
             int bid = (int) jTable1.getModel().getValueAt(row, 0);
@@ -1114,6 +1123,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_RateSelectedBookButtonActionPerformed
+
 
     private void sentmessageTableRowMouseclick(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sentmessageTableRowMouseclick
         // TODO add your handling code here:
@@ -1183,14 +1193,53 @@ public class tabpannedUserPage extends javax.swing.JFrame {
         MessageTextArea.setText("");
     }//GEN-LAST:event_ClearMessageActionPerformed
 
-    private void InviteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InviteButtonActionPerformed
+    private void MessageSendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MessageSendButtonActionPerformed
+
         // TODO add your handling code here:
-        //this button checks the points availabel and if ok sends message to the selected user to read the book 
+        //this button checks the points availabel and if ok sends message to the selected user to read the book
+        String receiver = (String) jComboBox1.getSelectedItem();
+        String message = MessageTextArea.getText();
+        DbConnector dbc = new DbConnector();
+        Connection conn = dbc.Connects();
 
-        int row = jTable1.getSelectedRow();
-        int users_total_point = get_points_available();
+        //int row = jTable1.getSelectedRow();
+        //int rowNum = (int) jTable1.getModel().getValueAt(row, 0);
+        String Sql = "INSERT INTO Message (Sender, Receiver, message_txt) "
+                + "VALUES (?, ?, ?)";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(Sql);
+            //stmt.setString(1, uploader_name);
+            if (receiver.equals("Please Select...") || message.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please Check the fields", "Input Error!", JOptionPane.WARNING_MESSAGE);
+            } else {
+                stmt.setString(1, username);
+                stmt.setString(2, receiver);
+                stmt.setString(3, message);
+                stmt.execute();
+                MessageTextArea.setText("");
+                jComboBox1.setSelectedItem("Please Select...");
+                JOptionPane.showMessageDialog(null, "Message sent");
 
-    }//GEN-LAST:event_InviteButtonActionPerformed
+                conn.commit();
+                conn.close();
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(tabpannedUserPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_MessageSendButtonActionPerformed
+
+    private void InviteButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InviteButton2ActionPerformed
+        // TODO add your handling code here:
+        String user = (String) UserNameComboBox.getSelectedItem();
+        if (!user.equals("Please Select...")) {
+            JOptionPane.showMessageDialog(null, user);
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select the valid user.");
+        }
+
+    }//GEN-LAST:event_InviteButton2ActionPerformed
 
 //    private void passBookID() {
 //        int row = jTable1.getSelectedRow();
@@ -1258,7 +1307,9 @@ public class tabpannedUserPage extends javax.swing.JFrame {
         PreparedStatement pst = null;
 
         jComboBox1.removeAllItems();
+        UserNameComboBox.removeAllItems();
         jComboBox1.addItem("Please Select...");
+        UserNameComboBox.addItem("Please Select...");
 
         try {
             DbConnector dbc = new DbConnector();
@@ -1271,6 +1322,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
                 if (!rs.getString("username").equals(username)) {
 
                     jComboBox1.addItem(rs.getString("username"));
+                    UserNameComboBox.addItem(rs.getString("username"));
                 }
             }
 
@@ -1489,7 +1541,6 @@ public class tabpannedUserPage extends javax.swing.JFrame {
     private javax.swing.JTable BookContributedByUserTable;
     private javax.swing.JTextField BookNameTextField;
     private javax.swing.JTable BookPendingUserTable;
-    private javax.swing.JTextField BookRating;
     private javax.swing.JButton BookSubmitButton;
     private javax.swing.JTextArea BookSummaryTextArea;
     private javax.swing.JLabel BooksListLabel;
@@ -1501,10 +1552,11 @@ public class tabpannedUserPage extends javax.swing.JFrame {
     private javax.swing.JLabel FirstNameLabel;
     private javax.swing.JTable InvitationReceivedTable;
     private javax.swing.JTable InvitationSentTable;
-    private javax.swing.JButton InviteButton;
+    private javax.swing.JButton InviteButton2;
     private javax.swing.JLabel LastNameLabel;
     private javax.swing.JTextField LastNameTextField;
     private javax.swing.JButton LogOutButton;
+    private javax.swing.JButton MessageSendButton;
     private javax.swing.JTextArea MessageTextArea;
     private javax.swing.JTextField PointEarnedTextField;
     private javax.swing.JButton RateSelectedBookButton;
@@ -1516,6 +1568,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
     private javax.swing.JTextArea SummaryTextArea;
     private javax.swing.JLabel UploadBookLabel;
     private javax.swing.JLabel UploadcoverPageLabel;
+    private javax.swing.JComboBox UserNameComboBox;
     private javax.swing.JLabel UserNametobePosted;
     private javax.swing.JTabbedPane UserProfileTab1;
     private javax.swing.JTextField UserTypeTextField;
@@ -1532,7 +1585,6 @@ public class tabpannedUserPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -1540,7 +1592,6 @@ public class tabpannedUserPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;

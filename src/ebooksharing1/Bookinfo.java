@@ -62,7 +62,10 @@ public class Bookinfo implements Serializable {
     //private Serializable cover;
 
     public ImageIcon getImage(){
-        return new ImageIcon(new ImageIcon(cover).getImage().getScaledInstance(100, 150, java.awt.Image.SCALE_SMOOTH));}
+        
+        return new ImageIcon(new ImageIcon(cover).getImage().getScaledInstance(100, 150, java.awt.Image.SCALE_SMOOTH));
+
+    }
     @Column(name = "AUTHOR")
     private String author;
     @Column(name = "SUMMARY")

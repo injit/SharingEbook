@@ -11,6 +11,7 @@ import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -31,7 +32,8 @@ public class ReviewRateFrame extends javax.swing.JFrame {
         this.username = username;
         initComponents();
         display_bookImage();
-        ReviewRateLabel.setText("Review and Rate " + Integer.toString(bookid));
+        ReviewRateLabel.setText("Review and Rate this Book ");
+        // + Integer.toString(bookid)
     }
 
     /**
@@ -69,8 +71,6 @@ public class ReviewRateFrame extends javax.swing.JFrame {
         reviewTextArea.setRows(5);
         jScrollPane1.setViewportView(reviewTextArea);
 
-        CoverLabel.setText("BookCover");
-
         SubmitRatingReviewButton.setText("Submit");
         SubmitRatingReviewButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,17 +92,19 @@ public class ReviewRateFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ReviewRateLabel)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(CoverLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(239, 239, 239)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(RatingLabel)
-                            .addComponent(ReviewLabel)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(ExitButton)
-                        .addGap(1, 1, 1)))
-                .addGap(38, 38, 38)
+                        .addGap(39, 39, 39))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ReviewRateLabel)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(CoverLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(201, 201, 201)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(RatingLabel)
+                                    .addComponent(ReviewLabel))))
+                        .addGap(38, 38, 38)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(SubmitRatingReviewButton)
                     .addComponent(RateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -116,9 +118,6 @@ public class ReviewRateFrame extends javax.swing.JFrame {
                 .addComponent(ReviewRateLabel)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(CoverLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(RateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -126,8 +125,11 @@ public class ReviewRateFrame extends javax.swing.JFrame {
                         .addGap(49, 49, 49)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ReviewLabel))))
-                .addGap(46, 46, 46)
+                            .addComponent(ReviewLabel)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(CoverLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SubmitRatingReviewButton)
                     .addComponent(ExitButton))
@@ -197,7 +199,7 @@ public class ReviewRateFrame extends javax.swing.JFrame {
         }
     }
 
-    private void display_bookImage() {
+    public ImageIcon getImage() {
         ResultSet rs = null;
         PreparedStatement pst = null;
         Blob image = null;
@@ -205,55 +207,24 @@ public class ReviewRateFrame extends javax.swing.JFrame {
         DbConnector dbc = new DbConnector();
         Connection conn = dbc.Connects();
         String sql = "SELECT cover FROM bookinfo  where bookid = ?";
-//        Bookinfo bi = new Bookinfo();
-//        
-//
-//     
-//
-//        try {
-//            pst = conn.prepareStatement(sql);
-//            pst.setInt(1, bookid);
-//            rs = pst.executeQuery();
-//            while (rs.next()) {
-//                //image = rs.getBlob("Cover");
-//                
-//
-//
-//                int blobLength = (int) image.length();
-//                imgData = image.getBytes(1, blobLength);
-//                //imgData = rs.getBytes("Cover");
-//            }
-//            bi.setCover(imgData);
-//            Image img = Toolkit.getDefaultToolkit().createImage(bi.getCover());
-//            ImageIcon icon = new ImageIcon(img);
-//            CoverLabel.setIcon(icon);
-//            
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ReviewRateFrame.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//            
+        try {
+            pst = conn.prepareStatement(sql);
+            pst.setInt(1, bookid);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                image = rs.getBlob("Cover");
+                imgData = image.getBytes(1, (int) image.length());
+            }
+            
+        } catch (Exception e) {
+            //Logger.getLogger(ReviewRateFrame.class.getName()).log(Level.SEVERE, null, ex);
+           e.printStackTrace();
+        }
+        return new ImageIcon(new ImageIcon(imgData).getImage().getScaledInstance(200, 250, java.awt.Image.SCALE_SMOOTH));
+    }
 
-        //InputStream in;
-//            while (rs.next()) {
-//                image = rs.getBlob("Cover");
-//                
-//
-////
-////                int blobLength = (int) image.length();
-////                imgData = image.getBytes(1, blobLength);
-//                //imgData = rs.getBytes("Cover");
-//            }
-//            in = image.getBinaryStream();
-//            BufferedImage img = ImageIO.read(in);
-//            //Image img = Toolkit.getDefaultToolkit().createImage(imgData);
-//            ImageIcon icon = new ImageIcon(img);
-//            CoverLabel.setIcon(icon);
-//            add(CoverLabel);
-//            setVisible(true);
-//            conn.close();
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, e);
-//        }
+    private void display_bookImage() {
+        CoverLabel.setIcon(getImage());
     }
 
     /**
