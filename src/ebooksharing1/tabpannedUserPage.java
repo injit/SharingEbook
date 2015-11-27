@@ -20,7 +20,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -56,7 +55,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
     }
 
     private void setgreetings() {
-        UserNametobePosted.setText("Welcome " + firstname);
+        UserNametobePosted.setText("Welcome " + username);
         StatusLabel.setText("Status: " + status);
     }
 
@@ -83,7 +82,6 @@ public class tabpannedUserPage extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         BookRating = new javax.swing.JTextField();
         RateSelectedBookButton = new javax.swing.JButton();
-        WriteReviewButton = new javax.swing.JButton();
         ReadSelectedBookButton = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         SummaryTextArea = new javax.swing.JTextArea();
@@ -220,17 +218,10 @@ public class tabpannedUserPage extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel14.setText("Rating");
 
-        RateSelectedBookButton.setText("Rate selected Book");
+        RateSelectedBookButton.setText("Rate/Review Book");
         RateSelectedBookButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RateSelectedBookButtonActionPerformed(evt);
-            }
-        });
-
-        WriteReviewButton.setText("Write Review");
-        WriteReviewButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                WriteReviewButtonActionPerformed(evt);
             }
         });
 
@@ -282,8 +273,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
                             .addComponent(jLabel13)
                             .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ReadSelectedBookButton)
-                            .addComponent(RateSelectedBookButton, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(WriteReviewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(RateSelectedBookButton, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(34, 34, 34))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -312,9 +302,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(RateSelectedBookButton)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(WriteReviewButton)
-                    .addComponent(jLabel12))
+                .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -1110,18 +1098,22 @@ public class tabpannedUserPage extends javax.swing.JFrame {
 
     private void RateSelectedBookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RateSelectedBookButtonActionPerformed
         // TODO add your handling code here:
-        int readduration = get_user_reading_duration();
-        if (readduration > 0) {
-            passBookID();
-        } else {
-            JOptionPane.showMessageDialog(null, "You haven't read this book yet!", "warning", JOptionPane.WARNING_MESSAGE);
-        }
-    }//GEN-LAST:event_RateSelectedBookButtonActionPerformed
+        int row = jTable1.getSelectedRow();
+        if (row != -1) {
+            int bid = (int) jTable1.getModel().getValueAt(row, 0);
+            int readduration = get_user_reading_duration();
+            if (readduration > 0) {
+                ReviewRateFrame bo = new ReviewRateFrame(bid, username);
+                bo.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "You haven't read this book yet!", "warning", JOptionPane.WARNING_MESSAGE);
+            }
 
-    private void WriteReviewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WriteReviewButtonActionPerformed
-        // TODO add your handling code here:
-        passBookID();
-    }//GEN-LAST:event_WriteReviewButtonActionPerformed
+        } else {
+            JOptionPane.showMessageDialog(null, "No book selected");
+        }
+
+    }//GEN-LAST:event_RateSelectedBookButtonActionPerformed
 
     private void sentmessageTableRowMouseclick(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sentmessageTableRowMouseclick
         // TODO add your handling code here:
@@ -1200,19 +1192,18 @@ public class tabpannedUserPage extends javax.swing.JFrame {
 
     }//GEN-LAST:event_InviteButtonActionPerformed
 
-    private void passBookID() {
-        int row = jTable1.getSelectedRow();
-        if (row != -1) {
-            int bid = (int) jTable1.getModel().getValueAt(row, 0);
-            BookOpened bo = new BookOpened(bid);
-            bo.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "No book selected");
-        }
-
-    }
+//    private void passBookID() {
+//        int row = jTable1.getSelectedRow();
+//        if (row != -1) {
+//            int bid = (int) jTable1.getModel().getValueAt(row, 0);
+//            BookOpened bo = new BookOpened(bid);
+//            bo.setVisible(true);
+//        } else {
+//            JOptionPane.showMessageDialog(null, "No book selected");
+//        }
+//
+//    }
 //Helper functions
-
     private int get_user_reading_duration() {
         ResultSet rs = null;
         PreparedStatement pst = null;
@@ -1243,22 +1234,22 @@ public class tabpannedUserPage extends javax.swing.JFrame {
     private void populateContributedTable() {
         ResultSet rs = null;
         PreparedStatement pst = null;
-
+        DbConnector dbc = new DbConnector();
+        Connection conn = dbc.Connects();
+        //int row = jTable1.getSelectedRow();
+        //int rowNum = (int) jTable1.getModel().getValueAt(row, 0);
+        String Sql = "Select bookName AS BookName, author as Author, rating as Ratings  FROM BookInfo WHERE uploader = ?";
         try {
-            DbConnector dbc = new DbConnector();
-            Connection conn = dbc.Connects();
-            //int row = jTable1.getSelectedRow();
-            //int rowNum = (int) jTable1.getModel().getValueAt(row, 0);
-            String Sql = "Select bookName AS BookName, author as Author, rating as Ratings  FROM BookInfo WHERE uploader = ?";
             pst = conn.prepareStatement(Sql);
             pst.setString(1, username);
             rs = pst.executeQuery();
             BookContributedByUserTable.setModel(DbUtils.resultSetToTableModel(rs));
             BookContributedByUserTable.setEnabled(false);
             conn.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            Logger.getLogger(tabpannedUserPage.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     private void populateDropDownCombo() {
@@ -1529,7 +1520,6 @@ public class tabpannedUserPage extends javax.swing.JFrame {
     private javax.swing.JTabbedPane UserProfileTab1;
     private javax.swing.JTextField UserTypeTextField;
     private javax.persistence.EntityManager UsersRegistrationPUEntityManager;
-    private javax.swing.JButton WriteReviewButton;
     private java.util.List<ebooksharing1.Bookinfo> bookinfoList1;
     private javax.persistence.Query bookinfoQuery1;
     private javax.swing.JLabel bookpathprintlabel;

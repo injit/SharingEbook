@@ -18,7 +18,7 @@ public class BookOpened extends javax.swing.JFrame {
     public BookOpened(int bookid) {
         this.bookid = bookid;
         initComponents();
-        jLabel1.setText(Integer.toString(bookid));
+        jLabel1.setText("Review and Rate "+Integer.toString(bookid));
     }
 
     /**

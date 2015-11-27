@@ -63,7 +63,6 @@ public class VisitorPage extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         RateSelectedBookButton = new javax.swing.JButton();
-        WriteReviewButton = new javax.swing.JButton();
         ReadSelectedBookButton = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         SummaryTextArea = new javax.swing.JTextArea();
@@ -135,17 +134,10 @@ public class VisitorPage extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel13.setText("Summary");
 
-        RateSelectedBookButton.setText("Rate selected Book");
+        RateSelectedBookButton.setText("Rate/Review");
         RateSelectedBookButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RateSelectedBookButtonActionPerformed(evt);
-            }
-        });
-
-        WriteReviewButton.setText("Write Review");
-        WriteReviewButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                WriteReviewButtonActionPerformed(evt);
             }
         });
 
@@ -208,8 +200,7 @@ public class VisitorPage extends javax.swing.JFrame {
                                 .addGap(51, 51, 51)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(RateSelectedBookButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(ReadSelectedBookButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(WriteReviewButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(ReadSelectedBookButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addContainerGap(41, Short.MAX_VALUE))))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -228,9 +219,7 @@ public class VisitorPage extends javax.swing.JFrame {
                         .addGap(40, 40, 40)
                         .addComponent(ReadSelectedBookButton)
                         .addGap(26, 26, 26)
-                        .addComponent(RateSelectedBookButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(WriteReviewButton))
+                        .addComponent(RateSelectedBookButton))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addComponent(BooksListLabel)
@@ -280,11 +269,6 @@ public class VisitorPage extends javax.swing.JFrame {
         // TODO add your handling code here:
          JOptionPane.showMessageDialog(null, "Sorry, You have no access!");
     }//GEN-LAST:event_RateSelectedBookButtonActionPerformed
-
-    private void WriteReviewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WriteReviewButtonActionPerformed
-        // TODO add your handling code here:
-         JOptionPane.showMessageDialog(null, "Sorry, You have no access!");
-    }//GEN-LAST:event_WriteReviewButtonActionPerformed
 
     private void ReadSelectedBookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReadSelectedBookButtonActionPerformed
         // TODO add your handling code here:
@@ -406,7 +390,6 @@ public class VisitorPage extends javax.swing.JFrame {
     private javax.swing.JTextArea SummaryTextArea;
     private javax.swing.JLabel UserNametobePosted;
     private javax.persistence.EntityManager UsersRegistrationPUEntityManager;
-    private javax.swing.JButton WriteReviewButton;
     private java.util.List<ebooksharing1.Bookinfo> bookinfoList;
     private java.util.List<ebooksharing1.Bookinfo> bookinfoList1;
     private java.util.List<ebooksharing1.Bookinfo> bookinfoList2;

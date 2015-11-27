@@ -317,7 +317,6 @@ public class tabpannedAH extends javax.swing.JFrame {
         String F_name = FirstNameTextField.getText();
         String L_name = LastNameTextField.getText();
         String E_add = EmailTextField.getText();
-        //String ID = IDTextField.getText();
         int points = 0;
 
         //////////
@@ -325,15 +324,9 @@ public class tabpannedAH extends javax.swing.JFrame {
         boolean result = false;
 
         if (jRadioButton3.isSelected()) {
-            //result = "Super User";
+
             result = true;
-        } //else if (jRadioButton4.isSelected()) {
-        //result = "User";
-        //          result = false;
-        //        }
-        //        } else {
-        //            result = "Unknown";
-        //        }
+        }
         try {
             DbConnector dbc = new DbConnector();
             Connection conn = dbc.Connects();
@@ -358,18 +351,12 @@ public class tabpannedAH extends javax.swing.JFrame {
 
             }
             if (!checkUserName) {
-                /*
-                INSERT INTO userInfo (username,password,email,firstname,lastname,point_balance,is_SU) 
-VALUES
- ('user1','sit','odio@lobortisauguescelerisque.com','Bo','Washington',26,True);
-                */
+
                 if (!checkemail) {
-                    String query = "Insert Into UserInfo (username,password,email,firstname,lastname,point_balance,is_SU) Values ('" + U_name + "','" + P_word + "','" + E_add + "','" + F_name + "','" + L_name + "',"+ 0 + "," + result + ")";
-                            //"//," + 0+")";//,'" +0+"')";
+                    String query = "Insert Into UserInfo (username,password,email,firstname,lastname,point_balance,is_SU) Values ('" + U_name + "','" + P_word + "','" + E_add + "','" + F_name + "','" + L_name + "'," + 0 + "," + result + ")";
 
                     if (!U_name.isEmpty() && !P_word.isEmpty() && !F_name.isEmpty() && !L_name.isEmpty() && !E_add.isEmpty() && (jRadioButton3.isSelected() || jRadioButton4.isSelected())) {
-                        if (jRadioButton3.isSelected())// && jRadioButton3.getText().equals("Super User"))
-                        {
+                        if (jRadioButton3.isSelected()) {
                             String input = JOptionPane.showInputDialog(null, "Enter Your Access code:", "Verification", JOptionPane.OK_OPTION);
                             if (input != null) {
 
@@ -377,10 +364,6 @@ VALUES
                                 {
                                     JOptionPane.showMessageDialog(null, "Congratulations! Access granted, You have now Super User privilege.");
                                     stmt.executeUpdate(query);
-                                    /*while(rs.next()){
-                                     System.out.println("Un"+ rs.getString("UserName")+ "UP "+ rs.getString("UserPassword")+ "FN "+ rs.getString("FirstName")+ "LN "+ rs.getString("LastName")+"email "+rs.getString("Email")+"UID "+ rs.getBigDecimal("UserID")+ "UType "+ rs.getString("UserType"));
-                                     }*/
-                                    //System.out.println("Connected to db");
                                     conn.close();
                                     cancel();
                                     GreetingPage gp = new GreetingPage();
@@ -398,7 +381,6 @@ VALUES
 
                             stmt.executeUpdate(query);
                             conn.close();
-                            //JOptionPane.showMessageDialog(null, "Congratulations, You are now Registered User.");
                             GreetingPage gp = new GreetingPage();
                             gp.setVisible(true);
                             cancel();
@@ -425,16 +407,12 @@ VALUES
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(null, "Thank You for Using Ebook Application.");
         cancel();
-        
-        //tabpannedAH AH = new tabpannedAH();
-        //AH.setVisible(true);
     }//GEN-LAST:event_CancelButtonActionPerformed
 
     private void SignInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignInButtonActionPerformed
         // TODO add your handling code here:
 
         String UserNameText = "";
-        //String delim = ",";
         String PassWordText = "";
         UserNameText = this.UserNameTextField1.getText();
         PassWordText = this.UserPassTextField.getText();
@@ -443,8 +421,6 @@ VALUES
             DbConnector dbc = new DbConnector();
 
             Connection conn = dbc.Connects();
-            //Class.forName("org.apache.derby.jdbc.ClientDriver");
-            //conn = DriverManager.getConnection("jdbc:derby://localhost:1527/UsersRegistration", "java", "java");
             Statement User_Stmt = conn.createStatement();
             String User_query = "Select * from UserInfo";
             ResultSet User_result = User_Stmt.executeQuery(User_query);
@@ -462,7 +438,7 @@ VALUES
                     if (UN.equalsIgnoreCase(UserNameText) && PW.equals(PassWordText)) {
                         checkmatch = true;
                         usernametogui = User_result.getString("userName");
-                        
+
                         firstNametogui = User_result.getString("firstName");
                         SuperUserType = User_result.getBoolean("is_SU");
                     }
@@ -471,15 +447,11 @@ VALUES
 
                 if (checkmatch) {
                     if (SuperUserType) {
-                        //JOptionPane.showMessageDialog(null, "You are logged in as  Super user.");
                         cancel();
-                        //RegUserPage rup = new RegUserPage("SuperUser", usernametogui);
                         tabpannedUserPage rup = new tabpannedUserPage("SuperUser", firstNametogui, usernametogui);
                         rup.setVisible(true);
                     } else if (!SuperUserType) {
-                        //JOptionPane.showMessageDialog(null, "You are logged in as registered user.");
                         cancel();
-                        //RegUserPage rup = new RegUserPage("Register User", usernametogui);
                         tabpannedUserPage rup = new tabpannedUserPage("User", firstNametogui, usernametogui);
                         rup.setVisible(true);
                     } else {

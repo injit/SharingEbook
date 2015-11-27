@@ -128,7 +128,6 @@
                                   <Component id="jScrollPane5" min="-2" pref="192" max="-2" attributes="0"/>
                                   <Component id="ReadSelectedBookButton" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="RateSelectedBookButton" alignment="0" min="-2" pref="165" max="-2" attributes="0"/>
-                                  <Component id="WriteReviewButton" alignment="0" min="-2" pref="165" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                           </Group>
@@ -168,10 +167,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="RateSelectedBookButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="WriteReviewButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jScrollPane6" min="-2" pref="125" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -329,18 +325,10 @@
             </Component>
             <Component class="javax.swing.JButton" name="RateSelectedBookButton">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Rate selected Book"/>
+                <Property name="text" type="java.lang.String" value="Rate/Review Book"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RateSelectedBookButtonActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="WriteReviewButton">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Write Review"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="WriteReviewButtonActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="ReadSelectedBookButton">
