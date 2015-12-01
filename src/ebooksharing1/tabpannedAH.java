@@ -1,10 +1,14 @@
 package ebooksharing1;
 
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -25,8 +29,21 @@ public class tabpannedAH extends javax.swing.JFrame {
     public tabpannedAH() {
         super("Application Home page");
         initComponents();
+        emailformat();
     }
 
+        private void emailformat() {
+        EmailTextField.setText("abc@example.com");
+        EmailTextField.addMouseListener(new MouseAdapter() {
+            
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                EmailTextField.setText("");
+               
+            }
+        });
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -330,22 +347,23 @@ public class tabpannedAH extends javax.swing.JFrame {
         try {
             DbConnector dbc = new DbConnector();
             Connection conn = dbc.Connects();
-
-            //            Class.forName("org.apache.derby.jdbc.ClientDriver");
-            //            conn = DriverManager.getConnection("jdbc:derby://localhost:1527/UsersRegistration", "java", "java");
             Statement stmt = conn.createStatement();
             Statement UserNameStmt = conn.createStatement();
             String UserN_query = "Select * from UserInfo";
             ResultSet UserN_result = UserNameStmt.executeQuery(UserN_query);
             boolean checkUserName = false;
             boolean checkemail = false;
+            //Pattern pattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
             while (UserN_result.next()) {
                 String UN = UserN_result.getString("UserName");
                 String Uemail = UserN_result.getString("email");
+                //Matcher matcher = pattern.matcher(Uemail);
+                //validate(Uemail);
                 if (UN.equalsIgnoreCase(U_name)) {
                     checkUserName = true;
                 }
-                if (Uemail.equalsIgnoreCase(E_add)) {
+                if (Uemail.equalsIgnoreCase(E_add)){//validate(Uemail)) {//matcher.matches()) {//Uemail.equalsIgnoreCase(E_add) || 
                     checkemail = true;
                 }
 
@@ -390,7 +408,7 @@ public class tabpannedAH extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "All field needs to be filled out.");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "This email address is already used.");
+                    JOptionPane.showMessageDialog(null, "Email address already registered ");//\n Email address format is wrong");
                 }
                 //cancel();
             } else {
@@ -402,10 +420,16 @@ public class tabpannedAH extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_RegisterButtonActionPerformed
-
+//    public final Pattern VALID_EMAIL_ADDRESS_REGEX
+//            = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+//
+//    public boolean validate(String emailStr) {
+//        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
+//        return matcher.find();
+//    }
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Thank You for Using Ebook Application.");
+        JOptionPane.showMessageDialog(null, "Thank You for Using Ebook Sharing Application.");
         cancel();
     }//GEN-LAST:event_CancelButtonActionPerformed
 

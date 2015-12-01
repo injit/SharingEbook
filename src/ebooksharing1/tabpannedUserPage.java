@@ -158,6 +158,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
         InvitationSentTable = new javax.swing.JTable();
         jScrollPane11 = new javax.swing.JScrollPane();
         InvitationReceivedTable = new javax.swing.JTable();
+        AcceptInvitationButton = new javax.swing.JButton();
         LogOutButton = new javax.swing.JButton();
         UserNametobePosted = new javax.swing.JLabel();
         StatusLabel = new javax.swing.JLabel();
@@ -822,6 +823,8 @@ public class tabpannedUserPage extends javax.swing.JFrame {
         ));
         jScrollPane11.setViewportView(InvitationReceivedTable);
 
+        AcceptInvitationButton.setText("Accept Invitation");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -829,13 +832,18 @@ public class tabpannedUserPage extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(68, 68, 68)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel23)
-                    .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel24))
-                .addContainerGap(66, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(AcceptInvitationButton)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel23)
+                            .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel24))
+                        .addContainerGap(66, Short.MAX_VALUE))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -848,7 +856,9 @@ public class tabpannedUserPage extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
                     .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(261, Short.MAX_VALUE))
+                .addGap(54, 54, 54)
+                .addComponent(AcceptInvitationButton)
+                .addContainerGap(178, Short.MAX_VALUE))
         );
 
         UserProfileTab1.addTab("Invitations", jPanel5);
@@ -1556,6 +1566,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AcceptInvitationButton;
     private javax.swing.JTextField BookAuthorTextField;
     private javax.swing.JButton BookBrowseButton;
     private javax.swing.JTable BookContributedByUserTable;

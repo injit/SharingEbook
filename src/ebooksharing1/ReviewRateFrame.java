@@ -11,6 +11,9 @@ import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -165,15 +168,37 @@ public class ReviewRateFrame extends javax.swing.JFrame {
         String review = reviewTextArea.getText();
         DbConnector dbc = new DbConnector();
         Connection conn = dbc.Connects();
+        int rating = 0;
+        int rating_count = 0;
+        int new_rating = 0;
+        int new_rating_count = 0;
 
         try {
 
             if (!Str_rate.isEmpty() && !review.isEmpty()) // && !uploader_name.isEmpty()
             {
                 int rate = Integer.parseInt(Str_rate);
+
+                String BookInfosql = "SELECT Rating, Rating_counts from BOOKINFO where Bookid = ?";
+                PreparedStatement BookInfostmt = conn.prepareStatement(BookInfosql);
+                BookInfostmt.setInt(1, bookid);
+                ResultSet rs = BookInfostmt.executeQuery();
+                while (rs.next()) {
+                    rating = rs.getInt("rating");
+                    rating_count = rs.getInt("rating_counts");
+                }
+                new_rating_count = rating_count + 1;
+                new_rating = ((rating * rating_count) + rate) / new_rating_count;
+                update_rating_rating_count(new_rating_count, new_rating);
+//                String BookInfosqlinsert = "UPDATE BOOKINFO SET rating = ?, rating_counts = ? WHERE BOOKID =?";
+//                PreparedStatement BookInfosqlinsertstmt = conn.prepareStatement(BookInfosqlinsert);
+//                BookInfosqlinsertstmt.setInt(1, new_rating);
+//                BookInfosqlinsertstmt.setInt(2, new_rating_count);
+//                BookInfosqlinsertstmt.setInt(3, bookid);
+//                BookInfosqlinsertstmt.executeUpdate();
+
                 String sql = "INSERT INTO REVIEW_RATING (BookID, Username, review_text, rating) "
                         + "VALUES (?, ?, ?, ?)";
-
                 PreparedStatement stmt = conn.prepareStatement(sql);
                 //stmt.setString(1, uploader_name);
                 stmt.setInt(1, bookid);
@@ -215,16 +240,34 @@ public class ReviewRateFrame extends javax.swing.JFrame {
                 image = rs.getBlob("Cover");
                 imgData = image.getBytes(1, (int) image.length());
             }
-            
+
         } catch (Exception e) {
             //Logger.getLogger(ReviewRateFrame.class.getName()).log(Level.SEVERE, null, ex);
-           e.printStackTrace();
+            e.printStackTrace();
         }
         return new ImageIcon(new ImageIcon(imgData).getImage().getScaledInstance(200, 250, java.awt.Image.SCALE_SMOOTH));
     }
 
     private void display_bookImage() {
         CoverLabel.setIcon(getImage());
+    }
+
+    private void update_rating_rating_count(int new_rating_count, int new_rating) {
+        DbConnector dbc = new DbConnector();
+        Connection conn = dbc.Connects();
+
+        String BookInfosqlinsert = "UPDATE BOOKINFO SET rating = ?, rating_counts = ? WHERE BOOKID =?";
+        PreparedStatement BookInfosqlinsertstmt;
+        try {
+            BookInfosqlinsertstmt = conn.prepareStatement(BookInfosqlinsert);
+            BookInfosqlinsertstmt.setInt(1, new_rating);
+            BookInfosqlinsertstmt.setInt(2, new_rating_count);
+            BookInfosqlinsertstmt.setInt(3, bookid);
+            BookInfosqlinsertstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ReviewRateFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**

@@ -18,8 +18,10 @@ public class EbookSharing {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        WritetoDB wdb = new WritetoDB();
-        wdb.Write();
+        //WritetoDB wdb = new WritetoDB();
+        //wdb.Write();
+        tabpannedAH tbah = new tabpannedAH();
+        tbah.setVisible(true);
     }
     
 }
