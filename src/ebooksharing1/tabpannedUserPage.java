@@ -18,11 +18,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.event.TableModelEvent;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -95,7 +97,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         sharingtimeTextField = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        Complaint = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         BookSubmitButton = new javax.swing.JButton();
@@ -165,10 +167,6 @@ public class tabpannedUserPage extends javax.swing.JFrame {
         ReadBookTable = new javax.swing.JTable();
         ReadBooksLabel = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        jScrollPane13 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jScrollPane14 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
         LogOutButton = new javax.swing.JButton();
         UserNametobePosted = new javax.swing.JLabel();
         StatusLabel = new javax.swing.JLabel();
@@ -280,7 +278,12 @@ public class tabpannedUserPage extends javax.swing.JFrame {
 
         jLabel21.setText("with User");
 
-        jButton1.setText("Complaint");
+        Complaint.setText("Complaint");
+        Complaint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComplaintActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -295,7 +298,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
                             .addComponent(jLabel12)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
-                                .addComponent(jButton1)
+                                .addComponent(Complaint)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -342,7 +345,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
                         .addComponent(jLabel14)
                         .addComponent(sharingtimeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel21)
-                        .addComponent(jButton1)))
+                        .addComponent(Complaint)))
                 .addGap(26, 26, 26)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -912,51 +915,15 @@ public class tabpannedUserPage extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(51, 153, 0));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane13.setViewportView(jTable2);
-
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane14.setViewportView(jTable3);
-
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(119, 119, 119)
-                .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65))
+            .addGap(0, 1176, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(165, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(92, 92, 92))
+            .addGap(0, 677, Short.MAX_VALUE)
         );
 
         SharedBooksTab.addTab("SharedBooks", jPanel6);
@@ -1137,13 +1104,20 @@ public class tabpannedUserPage extends javax.swing.JFrame {
         if (row != -1) {
             int bid = (int) jTable1.getModel().getValueAt(row, 0);
 
-            int users_total_point = get_points_available();
-            if (users_total_point > 0) {
-                //passBookID();
-                BookOpened bo = new BookOpened(bid);
-                bo.setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(null, "Sorry You don't have enough points");
+            try {
+                //int users_total_point = get_points_available();
+                passBookID();
+//            if (users_total_point > 0) {
+//                //passBookID();
+//                //BookOpened bo = new BookOpened(bid);
+//                //bo.setVisible(true);
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Sorry You don't have enough points");
+//            }
+            } catch (SQLException ex) {
+                Logger.getLogger(tabpannedUserPage.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(tabpannedUserPage.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         } else {
@@ -1151,6 +1125,124 @@ public class tabpannedUserPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ReadSelectedBookButtonActionPerformed
 
+    private void passBookID()throws SQLException, IOException{
+         int row = jTable1.getSelectedRow();
+        if (row != -1) {
+            int bid = (int) jTable1.getModel().getValueAt(row, 0);
+
+            DbConnector dbc = new DbConnector();
+            Connection conn = dbc.Connects();
+            //int row = SentMessageTable.getSelectedRow();
+            //int rowNum = (int) SentMessageTable.getModel().getValueAt(row, 0);
+            String sql = "SELECT POINT_BALANCE FROM UserInfo  WHERE username = ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, username);
+            ResultSet rs = pst.executeQuery();
+            //JFrame frame = new JFrame("Purchase Time for the Book");
+            //String time = JOptionPane.showInputDialog(frame, "For how long would you rent the book? (in seconds)");
+            int user_points = 0;
+            int book_points =0;
+
+            while (rs.next()) {
+                user_points = rs.getInt("POINT_BALANCE");
+            }
+            JFrame frame = new JFrame("Purchase Time for the Book");
+            String time = JOptionPane.showInputDialog(frame, "For how long would you rent the book? (in seconds)");
+            int time_purchased = Integer.parseInt(time);
+            String sql2 = "SELECT READING_POINTS FROM BOOKINFO WHERE BOOKID = ?";
+            PreparedStatement pst2 = conn.prepareStatement(sql2);
+            pst2.setInt(1, bid);
+            ResultSet rs2 = pst2.executeQuery();
+            while (rs2.next()) {
+                book_points = rs2.getInt("READING_POINTS");
+            }
+                if (user_points > (time_purchased * book_points)) {
+                    user_points = user_points - (time_purchased * book_points);
+                    String sql3 = "UPDATE USERINFO SET POINT_BALANCE = ? WHERE USERNAME = ?";
+                    PreparedStatement statement = conn.prepareStatement(sql3);
+                    statement.setInt(1, user_points);
+                    
+                    statement.setString(2, username);
+                    statement.executeUpdate();
+                    String sql7 = "SELECT READING_COUNTS FROM BOOKINFO where BOOKID = ?";
+                    PreparedStatement pst7 = conn.prepareStatement(sql7);
+                    pst7.setInt(1, bid);
+                    ResultSet rs7 = pst7.executeQuery();
+                    int reading_count = 0;
+                    while (rs.next()) {
+                        reading_count = rs7.getInt("READING_COUTNS");
+
+                    }
+                    reading_count++;
+                    
+            
+                    String sql8 = "UPDATE BOOKINFO SET READING_COUNTS = ? WHERE BOOKID = ?";
+                    PreparedStatement pst8 = conn.prepareStatement(sql8);
+                    pst8.setInt(1, reading_count++);
+                    pst8.setInt(2, bid);
+                    pst8.executeUpdate();
+                    
+                    Date date = new Date();//Calendar.getInstance().getTime();
+                    java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+                    String sql0 = "UPDATE BOOKINFO SET LAST_DATE_READ = ? WHERE BOOKID = ? ";
+                    PreparedStatement st = conn.prepareStatement(sql0);
+                    st.setDate(1, sqlDate);
+                    st.setInt(2, bid);
+                    st.executeUpdate();
+                    
+                    
+                    
+                    
+                    BookOpened bo = new BookOpened(bid, time_purchased);
+                    bo.setVisible(true);
+                    
+                    String sql5 = "SELECT READING_DURATION FROM READINGHISTORY WHERE USERNAME = ? AND BOOKID = ?";
+                    PreparedStatement statement1 = conn.prepareStatement(sql5);
+                    statement1.setString(1, username);
+                    statement1.setInt(2, bid);
+                    
+                    ResultSet rs1 = statement1.executeQuery();
+                    if(rs1.next()== false){
+                     String sql6 = "INSERT INTO READINGHISTORY (USERNAME, BOOKID) VALUES (?, ?)" ;
+                     PreparedStatement pst6 = conn.prepareStatement(sql6);
+                     pst6.setString(1, username);
+                     pst6.setInt(2, bid);
+                     pst6.execute();
+                     
+                    }
+               
+                } else {
+                    JOptionPane.showMessageDialog(null, "Not enough points");
+                }
+            String sql4 = "SELECT READING_DURATION FROM READINGHISTORY WHERE BOOKID = ? AND USERNAME = ?";
+            PreparedStatement pst3 = conn.prepareStatement(sql4);
+            pst3.setInt(1, bid);
+            pst3.setString(2, username);
+            ResultSet rs3 = pst3.executeQuery();
+            
+            int reading_history = 0;
+            while(rs3.next()){
+                reading_history = rs3.getInt("READING_DURATION");
+            }
+            reading_history+= time_purchased;
+            String sql5 = "UPDATE READINGHISTORY SET READING_DURATION = ? WHERE BOOKID =? AND USERNAME = ?";
+            PreparedStatement statement = conn.prepareStatement(sql5);
+            statement.setInt(1, reading_history);
+            statement.setInt(2, bid);
+            statement.setString(3, username);
+            statement.executeUpdate();
+            
+            String sql7 = "SELECT READING_COUNTS FROM BOOKINFO where BOOKID = ?";
+            PreparedStatement pst7 = conn.prepareStatement(sql7);
+            pst7.setInt(1, bid);
+            ResultSet rs7 = pst7.executeQuery();
+            
+          
+        } else {
+            JOptionPane.showMessageDialog(null, "No book selected");
+        }
+        
+    }
     private int get_points_available() {
         ResultSet rs = null;
         PreparedStatement pst = null;
@@ -1372,7 +1464,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
 
         if (!user.equals("Please Select...") && row != -1 && !sharingtime.isEmpty()) {
             int stime = Integer.parseInt(sharingtime);
-            if ((stime / 10) <= (get_points_available()/2)) {
+            if ((stime / 10) <= (get_points_available() / 2)) {
                 int bid = (int) jTable1.getModel().getValueAt(row, 0);
                 InserttoInvitationTable(user, bid, stime);
                 JOptionPane.showMessageDialog(null, "Invitation sent to " + user);
@@ -1432,37 +1524,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
 
     private void AcceptInvitationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcceptInvitationButtonActionPerformed
         // TODO add your handling code here:
-        accepting_Invitation();
-
-
-    }//GEN-LAST:event_AcceptInvitationButtonActionPerformed
-
-    private void DeclineInvitationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeclineInvitationButtonActionPerformed
-        // TODO add your handling code here:
-        int dialogResult = JOptionPane.showConfirmDialog(null, "Selecting Yes will delete the invitation from the list.\nDo you still want to decline the Invitation?", "Confirmation", JOptionPane.YES_NO_OPTION);
-//        ResultSet rs = null;
-//        PreparedStatement pst = null;
-//        String inviting_User = "";
-//        String invited_User = "";
-//        int bid = 0;
-//        int stime = 0;
-//
-//        String status = "";
-//        int rowNum = 0;
-//        DbConnector dbc = new DbConnector();
-//        Connection conn = dbc.Connects();
-//
-//        int row = InvitationReceivedTable.getSelectedRow();
-//
-//        if (row != -1) {
-//            //int 
-//            rowNum = (int) InvitationReceivedTable.getModel().getValueAt(row, 0);
-//
-////            work_on_InvitationTable(rowNum);
-//            String sql = "SELECT * FROM Invitation  WHERE IID = ?";
-    }//GEN-LAST:event_DeclineInvitationButtonActionPerformed
-
-    private void accepting_Invitation() {
+        //accepting_Invitation();
         ResultSet rs = null;
         PreparedStatement pst = null;
         String inviting_User = "";
@@ -1500,72 +1562,215 @@ public class tabpannedUserPage extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(tabpannedUserPage.class.getName()).log(Level.SEVERE, null, ex);
             }
-       // } 
-         if (status.equals("Accepted")) {
-            JOptionPane.showMessageDialog(null, "You can't accept twice");
+            // } 
+            if (status.equals("Accepted")) {
+                JOptionPane.showMessageDialog(null, "You can't accept twice");
+            } else {
+
+                try {
+                    deduct_points_of_inviter(inviting_User, stime, bid);
+                    
+                    update_shared_book_status_in_invitation_table(rowNum);
+                    populateInvitationReceivedTable();
+                    JOptionPane.showMessageDialog(null, "Book has been accepted");
+                } catch (SQLException ex) {
+                    Logger.getLogger(tabpannedUserPage.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         } else {
-            deduct_points_of_inviter(inviting_User, stime);
-            insert_to_shared_book(inviting_User, bid, stime);
-            update_shared_book_status_in_invitation_table(rowNum);
-            populateInvitationReceivedTable();
-            JOptionPane.showMessageDialog(null, "Book has been accepted");
-        }
-    }
-        else {
 //            int row2 = InvitationSentTable.getSelectedRow();
 //            int rowNum = (int) InvitationSentTable.getModel().getValueAt(row2, 0);
             JOptionPane.showMessageDialog(null, "Please select the book first.");
             //work_on_InvitationTable(rowNum);
         }
-    }
+
+
+    }//GEN-LAST:event_AcceptInvitationButtonActionPerformed
+
+    private void DeclineInvitationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeclineInvitationButtonActionPerformed
+        // TODO add your handling code here:
+        int dialogResult = JOptionPane.showConfirmDialog(null, "Selecting Yes will delete the invitation from the list.\nDo you still want to decline the Invitation?", "Confirmation", JOptionPane.YES_NO_OPTION);
+//        ResultSet rs = null;
+//        PreparedStatement pst = null;
+//        String inviting_User = "";
+//        String invited_User = "";
+//        int bid = 0;
+//        int stime = 0;
+//
+//        String status = "";
+//        int rowNum = 0;
+//        DbConnector dbc = new DbConnector();
+//        Connection conn = dbc.Connects();
+//
+//        int row = InvitationReceivedTable.getSelectedRow();
+//
+//        if (row != -1) {
+//            //int 
+//            rowNum = (int) InvitationReceivedTable.getModel().getValueAt(row, 0);
+//
+////            work_on_InvitationTable(rowNum);
+//            String sql = "SELECT * FROM Invitation  WHERE IID = ?";
+    }//GEN-LAST:event_DeclineInvitationButtonActionPerformed
+
+    private void ComplaintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComplaintActionPerformed
+        // TODO add your handling code here:
+         int row = jTable1.getSelectedRow();   
+         if(row != -1){
+          int bid = (int) jTable1.getModel().getValueAt(row, 0);
+          ComplaintUserPage co = new ComplaintUserPage(bid, username);
+          co.setVisible(true);
+     }
+          else{
+          JOptionPane.showMessageDialog(null, "No book selected");
+          }
+    }//GEN-LAST:event_ComplaintActionPerformed
+
+ //   private void accepting_Invitation() {
+//        ResultSet rs = null;
+//        PreparedStatement pst = null;
+//        String inviting_User = "";
+//        String invited_User = "";
+//        int bid = 0;
+//        int stime = 0;
+//
+//        String status = "";
+//        int rowNum = 0;
+//        DbConnector dbc = new DbConnector();
+//        Connection conn = dbc.Connects();
+//
+//        int row = InvitationReceivedTable.getSelectedRow();
+//
+//        if (row != -1) {
+//            //int 
+//            rowNum = (int) InvitationReceivedTable.getModel().getValueAt(row, 0);
+//
+////            work_on_InvitationTable(rowNum);
+//            String sql = "SELECT * FROM Invitation  WHERE IID = ?";
+//            try {
+//                pst = conn.prepareStatement(sql);
+//                pst.setInt(1, rowNum);
+//                //pst.setString(2, username);
+//                rs = pst.executeQuery();
+//                while (rs.next()) {
+//                    inviting_User = rs.getString("inviter");
+//                    invited_User = rs.getString("Invitee");
+//                    bid = rs.getInt("bookid");
+//                    stime = rs.getInt("sharing_points");
+//                    status = rs.getString("status");
+//
+//                }
+//
+//            } catch (SQLException ex) {
+//                Logger.getLogger(tabpannedUserPage.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//       // } 
+//         if (status.equals("Accepted")) {
+//            JOptionPane.showMessageDialog(null, "You can't accept twice");
+//        } else {
+//            deduct_points_of_inviter(inviting_User, stime);
+//            insert_to_shared_book(inviting_User, bid, stime);
+//            update_shared_book_status_in_invitation_table(rowNum);
+//            populateInvitationReceivedTable();
+//            JOptionPane.showMessageDialog(null, "Book has been accepted");
+//        }
+//    }
+//        else {
+////            int row2 = InvitationSentTable.getSelectedRow();
+////            int rowNum = (int) InvitationSentTable.getModel().getValueAt(row2, 0);
+//            JOptionPane.showMessageDialog(null, "Please select the book first.");
+//            //work_on_InvitationTable(rowNum);
+//        }
+    //   }
 //Helper functions
-
-
-    private void deduct_points_of_inviter(String inviter, int sharing_time) {
+    private void deduct_points_of_inviter(String inviter, int sharing_time, int bid) throws SQLException {
         int new_point_balance = 0;
 //        int sharing_points = 0;
         int old_point_balance = 0;
- //       ResultSet rs = null;
+        //       ResultSet rs = null;
         //PreparedStatement pst = null;
         PreparedStatement pst2 = null;
         DbConnector dbc = new DbConnector();
         Connection conn = dbc.Connects();
+        
+        String sql1 = "SELECT READING_POINTS FROM BOOKINFO WHERE BID = ?";
+        PreparedStatement pst1 = conn.prepareStatement(sql1);
+        pst1.setInt(1, bid);
+        ResultSet rs = pst1.executeQuery();
+        int asking_points = 0;
+        while(rs.next()){
+        asking_points = rs.getInt("READING_POINTS");
+       
+        }
+        
+        
+        
+        
+        
         //String getPointBalance_sql = "Select Point_balance From UserInfo Where username =?";
-
+        
         String sql = "UPDATE UserInfo SET Point_balance = ? WHERE Username = ?";
+        String sql_inviter_points = "SELECT POINT_BALANCE FROM USERINFO WHERE USERNAME = ?";
+        PreparedStatement pst3 = conn.prepareStatement(sql_inviter_points);
+        pst3.setString(1, inviter);
+        ResultSet rs_inviter = pst3.executeQuery();
+        int new_point_balance2 = 0;
+        int inviter_old_points = 0;
+        int invitee_old_points= get_points_available();
+        while(rs_inviter.next()){
+            inviter_old_points = rs_inviter.getInt("POINT_BALANCE");
+        }
+        if((inviter_old_points >= ((sharing_time * asking_points)/2)) && (invitee_old_points >= ((sharing_time * asking_points)/2))){
         try {
-//            pst = conn.prepareStatement(getPointBalance_sql);
-//            pst.setString(1, inviter);
-//            rs = pst.executeQuery();
-//            while (rs.next()) {
-//                old_point_balance = rs.getInt("Point_balance");
-//            }
-            old_point_balance = get_points_available();
-            new_point_balance = (old_point_balance - (sharing_time/10));
+            
+            
+            
+            
+            //old_point_balance = get_points_available();//gets the existing user points 
+            
+            new_point_balance = (inviter_old_points - ((sharing_time * asking_points)/2));//bug in this section
             pst2 = conn.prepareStatement(sql);
             pst2.setInt(1, new_point_balance);
             pst2.setString(2, inviter);
             pst2.executeUpdate();
+            
+            
+            new_point_balance2 = (invitee_old_points - ((sharing_time * asking_points)/2));
+            PreparedStatement pst4 = conn.prepareStatement(sql);
+            pst4.setInt(1, new_point_balance2);
+            pst4.setString(2, username);
+            pst4.executeUpdate();
+            
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(tabpannedUserPage.class.getName()).log(Level.SEVERE, null, ex);
         }
+        insert_to_shared_book(username, bid, sharing_time, inviter);
+        }
+        else{
+        JOptionPane.showMessageDialog(null, "Not enough points");
+        }
     }
 
-    private void insert_to_shared_book(String inviter, int bookid, int shared_time) {
+    private void insert_to_shared_book(String invitee, int bookid, int shared_time, String inviter) {
         PreparedStatement pst = null;
+        PreparedStatement pst1 = null;
+        
         DbConnector dbc = new DbConnector();
         Connection conn = dbc.Connects();
-        String sql = "INSERT INTO SHAREDBOOKS (inviter, invitee, BookID, shared_time) "
-                + "VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO SHAREDBOOKS (username, BookID, shared_time) "
+                + "VALUES (?, ?, ?)";
 
         try {
             pst = conn.prepareStatement(sql);
-            pst.setString(1, inviter);
-            pst.setString(2, username);
-            pst.setInt(3, bookid);
-            pst.setInt(4, shared_time);
-            pst.execute();
+            pst.setString(1, invitee);
+            pst.setInt(2, bookid);
+            pst.setInt(3, shared_time);
+            pst.executeQuery();
+            pst1 = conn.prepareStatement(sql);
+            pst1.setString(1, inviter);
+            pst1.setInt(2, bookid);
+            pst1.setInt(3, shared_time);
+            pst1.executeQuery();
         } catch (SQLException ex) {
             Logger.getLogger(tabpannedUserPage.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1907,6 +2112,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
     private javax.swing.JButton BrowseCoverpageButton;
     private javax.swing.JButton CancelButton;
     private javax.swing.JButton ClearMessage;
+    private javax.swing.JButton Complaint;
     private javax.swing.JButton DeclineInvitationButton;
     private javax.swing.JTextField EmailTextField;
     private javax.swing.JTextField FNameTextField;
@@ -1943,7 +2149,6 @@ public class tabpannedUserPage extends javax.swing.JFrame {
     private javax.swing.JLabel coverpagepathprint;
     private javax.swing.JLabel coverpagepathprintLabel;
     private javax.swing.JTextField gotComplaintTextField;
-    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1979,8 +2184,6 @@ public class tabpannedUserPage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
-    private javax.swing.JScrollPane jScrollPane13;
-    private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1990,8 +2193,6 @@ public class tabpannedUserPage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTextField pointsTextField;
     private javax.swing.JTextField sharingtimeTextField;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
