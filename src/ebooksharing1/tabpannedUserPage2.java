@@ -20,16 +20,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.event.TableModelEvent;
 import net.proteanit.sql.DbUtils;
 
 /**
  *
  * @author indrajit
  */
-public class tabpannedUserPage extends javax.swing.JFrame {
+public class tabpannedUserPage2 extends javax.swing.JFrame {
 
     /**
      * Creates new form tabpannedUserPage
@@ -40,7 +40,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
     private static String status = "";
     private static String username = "";
 
-    public tabpannedUserPage(String status, String firstname, String username) {
+    public tabpannedUserPage2(String status, String firstname, String username) {
         super("Register User Page");
         this.username = username;
         this.status = status;
@@ -77,7 +77,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
         UsersRegistrationPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("UsersRegistrationPU").createEntityManager();
         bookinfoQuery1 = java.beans.Beans.isDesignTime() ? null : UsersRegistrationPUEntityManager.createQuery("SELECT b FROM Bookinfo b");
         bookinfoList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : bookinfoQuery1.getResultList();
-        SharedBooksTab = new javax.swing.JTabbedPane();
+        UserProfileTab1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         BooksListLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -92,10 +92,30 @@ public class tabpannedUserPage extends javax.swing.JFrame {
         jScrollPane6 = new javax.swing.JScrollPane();
         ReviewDisplayTable = new javax.swing.JTable();
         UserNameComboBox = new javax.swing.JComboBox();
-        jLabel14 = new javax.swing.JLabel();
-        sharingtimeTextField = new javax.swing.JTextField();
-        jLabel21 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        FirstNameLabel = new javax.swing.JLabel();
+        LastNameLabel = new javax.swing.JLabel();
+        FNameTextField = new javax.swing.JTextField();
+        LastNameTextField = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        BookContributedByUserTable = new javax.swing.JTable();
+        EmailTextField = new javax.swing.JTextField();
+        PointEarnedTextField = new javax.swing.JTextField();
+        gotComplaintTextField = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        BookPendingUserTable = new javax.swing.JTable();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        UserTypeTextField = new javax.swing.JTextField();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        ReadBookTable = new javax.swing.JTable();
+        ReadBooksLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         BookSubmitButton = new javax.swing.JButton();
@@ -139,36 +159,6 @@ public class tabpannedUserPage extends javax.swing.JFrame {
         jScrollPane11 = new javax.swing.JScrollPane();
         InvitationReceivedTable = new javax.swing.JTable();
         AcceptInvitationButton = new javax.swing.JButton();
-        DeclineInvitationButton = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        FirstNameLabel = new javax.swing.JLabel();
-        LastNameLabel = new javax.swing.JLabel();
-        FNameTextField = new javax.swing.JTextField();
-        LastNameTextField = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        BookContributedByUserTable = new javax.swing.JTable();
-        EmailTextField = new javax.swing.JTextField();
-        PointEarnedTextField = new javax.swing.JTextField();
-        gotComplaintTextField = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        BookPendingUserTable = new javax.swing.JTable();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        UserTypeTextField = new javax.swing.JTextField();
-        jScrollPane12 = new javax.swing.JScrollPane();
-        ReadBookTable = new javax.swing.JTable();
-        ReadBooksLabel = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
-        jScrollPane13 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jScrollPane14 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
         LogOutButton = new javax.swing.JButton();
         UserNametobePosted = new javax.swing.JLabel();
         StatusLabel = new javax.swing.JLabel();
@@ -226,11 +216,6 @@ public class tabpannedUserPage extends javax.swing.JFrame {
                 jTable1MouseClicked(evt);
             }
         });
-        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTable1KeyPressed(evt);
-            }
-        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel12.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
@@ -276,12 +261,6 @@ public class tabpannedUserPage extends javax.swing.JFrame {
 
         UserNameComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel14.setText("Share Time");
-
-        jLabel21.setText("with User");
-
-        jButton1.setText("Complaint");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -290,21 +269,12 @@ public class tabpannedUserPage extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 889, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(sharingtimeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(51, 51, 51)
-                                .addComponent(jLabel21)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(UserNameComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)
+                                .addGap(59, 59, 59)
                                 .addComponent(InviteButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -338,19 +308,193 @@ public class tabpannedUserPage extends javax.swing.JFrame {
                     .addComponent(RateSelectedBookButton)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(InviteButton2)
-                        .addComponent(UserNameComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel14)
-                        .addComponent(sharingtimeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel21)
-                        .addComponent(jButton1)))
-                .addGap(26, 26, 26)
+                        .addComponent(UserNameComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
 
-        SharedBooksTab.addTab("Browse Book", jPanel1);
+        UserProfileTab1.addTab("Browse Book", jPanel1);
+
+        jPanel4.setBackground(new java.awt.Color(51, 153, 0));
+
+        FirstNameLabel.setText("First Name:");
+
+        LastNameLabel.setText("Last Name:");
+
+        jLabel6.setText("Email");
+
+        jLabel8.setText("Point Earned");
+
+        jLabel9.setText("Got Complain");
+
+        jLabel10.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        jLabel10.setText("The list of books you contributed");
+
+        BookContributedByUserTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "BookName", "Author", "Ratings"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(BookContributedByUserTable);
+
+        jLabel11.setFont(new java.awt.Font("Lucida Grande", 1, 36)); // NOI18N
+        jLabel11.setText("Your Details");
+
+        jLabel15.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jLabel15.setText("Approved books in selves");
+
+        BookPendingUserTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "BookName", "Author", "RequestedPoints"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(BookPendingUserTable);
+
+        jLabel16.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jLabel16.setText("Pending Books");
+
+        jLabel22.setText("User Type");
+
+        ReadBookTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Book Id", "Time in sec"
+            }
+        ));
+        jScrollPane12.setViewportView(ReadBookTable);
+
+        ReadBooksLabel.setText("List of Books You Read");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6)
+                            .addComponent(LastNameLabel)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9)
+                            .addComponent(FirstNameLabel)
+                            .addComponent(jLabel22))
+                        .addGap(66, 66, 66)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(PointEarnedTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                            .addComponent(gotComplaintTextField)
+                            .addComponent(EmailTextField)
+                            .addComponent(LastNameTextField)
+                            .addComponent(FNameTextField)
+                            .addComponent(UserTypeTextField)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel10)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addComponent(jLabel11)))
+                .addGap(102, 102, 102)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel16)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ReadBooksLabel)
+                            .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(ReadBooksLabel))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(FirstNameLabel)
+                            .addComponent(FNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(LastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LastNameLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(EmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel8)
+                            .addComponent(PointEarnedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(gotComplaintTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9)))
+                    .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(UserTypeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel10)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(84, 84, 84))
+        );
+
+        UserProfileTab1.addTab("User Profile", jPanel4);
 
         jPanel2.setBackground(new java.awt.Color(51, 153, 0));
         jPanel2.setToolTipText("");
@@ -489,7 +633,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
                 .addGap(218, 218, 218))
         );
 
-        SharedBooksTab.addTab("Book Upload", jPanel2);
+        UserProfileTab1.addTab("Book Upload", jPanel2);
 
         jPanel3.setBackground(new java.awt.Color(51, 153, 0));
 
@@ -644,7 +788,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        SharedBooksTab.addTab("Messages", jPanel3);
+        UserProfileTab1.addTab("Messages", jPanel3);
 
         jPanel5.setBackground(new java.awt.Color(51, 153, 0));
 
@@ -656,43 +800,31 @@ public class tabpannedUserPage extends javax.swing.JFrame {
 
         InvitationSentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "You Invited", "Shared Points", "Shared_status"
+                "You Invited", "Shared Points"
             }
         ));
         jScrollPane10.setViewportView(InvitationSentTable);
 
         InvitationReceivedTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Invited By", "Shared Points", "Shared_Status"
+                "Invited By", "Shared Points"
             }
         ));
         jScrollPane11.setViewportView(InvitationReceivedTable);
 
         AcceptInvitationButton.setText("Accept Invitation");
-        AcceptInvitationButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AcceptInvitationButtonActionPerformed(evt);
-            }
-        });
-
-        DeclineInvitationButton.setText("Decline Invitation");
-        DeclineInvitationButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DeclineInvitationButtonActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -703,8 +835,6 @@ public class tabpannedUserPage extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(AcceptInvitationButton)
-                        .addGap(51, 51, 51)
-                        .addComponent(DeclineInvitationButton)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -728,238 +858,11 @@ public class tabpannedUserPage extends javax.swing.JFrame {
                     .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
                     .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(54, 54, 54)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AcceptInvitationButton)
-                    .addComponent(DeclineInvitationButton))
+                .addComponent(AcceptInvitationButton)
                 .addContainerGap(178, Short.MAX_VALUE))
         );
 
-        SharedBooksTab.addTab("Invitations", jPanel5);
-
-        jPanel4.setBackground(new java.awt.Color(51, 153, 0));
-
-        FirstNameLabel.setText("First Name:");
-
-        LastNameLabel.setText("Last Name:");
-
-        jLabel6.setText("Email");
-
-        jLabel8.setText("Point Earned");
-
-        jLabel9.setText("Got Complain");
-
-        jLabel10.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
-        jLabel10.setText("The list of books you contributed");
-
-        BookContributedByUserTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "BookName", "Author", "Ratings"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane3.setViewportView(BookContributedByUserTable);
-
-        jLabel11.setFont(new java.awt.Font("Lucida Grande", 1, 36)); // NOI18N
-        jLabel11.setText("Your Details");
-
-        jLabel15.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-        jLabel15.setText("Approved books in selves");
-
-        BookPendingUserTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "BookName", "Author", "RequestedPoints"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane4.setViewportView(BookPendingUserTable);
-
-        jLabel16.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-        jLabel16.setText("Pending Books");
-
-        jLabel22.setText("User Type");
-
-        ReadBookTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Book Id", "Time in sec"
-            }
-        ));
-        jScrollPane12.setViewportView(ReadBookTable);
-
-        ReadBooksLabel.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-        ReadBooksLabel.setText("List of Books You Read");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6)
-                            .addComponent(LastNameLabel)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9)
-                            .addComponent(FirstNameLabel)
-                            .addComponent(jLabel22))
-                        .addGap(66, 66, 66)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(PointEarnedTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
-                            .addComponent(gotComplaintTextField)
-                            .addComponent(EmailTextField)
-                            .addComponent(LastNameTextField)
-                            .addComponent(FNameTextField)
-                            .addComponent(UserTypeTextField)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel10)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(jLabel11)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ReadBooksLabel)
-                    .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16))
-                .addContainerGap(52, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(ReadBooksLabel))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(FirstNameLabel)
-                            .addComponent(FNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(LastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LastNameLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(EmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8)
-                            .addComponent(PointEarnedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(gotComplaintTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(UserTypeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel22)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addComponent(jLabel10)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel16))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(84, 84, 84))
-        );
-
-        SharedBooksTab.addTab("User Profile", jPanel4);
-
-        jPanel6.setBackground(new java.awt.Color(51, 153, 0));
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane13.setViewportView(jTable2);
-
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane14.setViewportView(jTable3);
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(119, 119, 119)
-                .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(165, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(92, 92, 92))
-        );
-
-        SharedBooksTab.addTab("SharedBooks", jPanel6);
+        UserProfileTab1.addTab("Invitations", jPanel5);
 
         LogOutButton.setText("LogOut");
         LogOutButton.addActionListener(new java.awt.event.ActionListener() {
@@ -986,7 +889,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(SharedBooksTab, javax.swing.GroupLayout.PREFERRED_SIZE, 1197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(UserProfileTab1, javax.swing.GroupLayout.PREFERRED_SIZE, 1197, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 12, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
@@ -1009,7 +912,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
                     .addComponent(StatusLabel)
                     .addComponent(RefreshButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(SharedBooksTab, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(UserProfileTab1, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1019,6 +922,8 @@ public class tabpannedUserPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BrowseCoverpageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BrowseCoverpageButtonActionPerformed
+        // TODO add your handling code here:
+
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         File file = chooser.getSelectedFile();
@@ -1027,6 +932,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
     }//GEN-LAST:event_BrowseCoverpageButtonActionPerformed
 
     private void BookBrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookBrowseButtonActionPerformed
+        // TODO add your handling code here:
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         File file = chooser.getSelectedFile();
@@ -1113,8 +1019,14 @@ public class tabpannedUserPage extends javax.swing.JFrame {
                 if (checkmatch) {
                     JOptionPane.showMessageDialog(null, "Repeated submission book is prohibited");
 
+//                } else if (copyrightcheck) {
+//                    final JPanel panel = new JPanel();
+//                    showMessageDialog(panel, "Copyright Issue", "Warning",
+//                            JOptionPane.WARNING_MESSAGE);
                 } else {
+                    //}
                     stmt.execute();
+
                     conn.commit();
                     conn.close();
                     JOptionPane.showMessageDialog(null, "Book submission succcessful.");
@@ -1222,7 +1134,6 @@ public class tabpannedUserPage extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:  
-
         displaySummary();
         populateReviewtable();
         //jTable1.setEnabled(false);
@@ -1239,11 +1150,12 @@ public class tabpannedUserPage extends javax.swing.JFrame {
 
     private void RateSelectedBookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RateSelectedBookButtonActionPerformed
         // TODO add your handling code here:
-
+        
         /*
-         public ImageIcon getImage(){
-         return new ImageIcon(new ImageIcon(cover).getImage().getScaledInstance(100, 150, java.awt.Image.SCALE_SMOOTH));}
-         */
+        public ImageIcon getImage(){
+        return new ImageIcon(new ImageIcon(cover).getImage().getScaledInstance(100, 150, java.awt.Image.SCALE_SMOOTH));}
+        */
+                
         int row = jTable1.getSelectedRow();
         if (row != -1) {
             int bid = (int) jTable1.getModel().getValueAt(row, 0);
@@ -1342,7 +1254,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
         try {
             PreparedStatement stmt = conn.prepareStatement(Sql);
             //stmt.setString(1, uploader_name);
-            if (receiver.equals("Please Select...") || message.isEmpty() || message.equals("Write your message here")) {
+            if (receiver.equals("Please Select...") || message.isEmpty() ||message.equals("Write your message here")) {
                 JOptionPane.showMessageDialog(null, "Please Check the fields", "Input Error!", JOptionPane.WARNING_MESSAGE);
             } else {
                 stmt.setString(1, username);
@@ -1358,7 +1270,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(tabpannedUserPage.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(tabpannedUserPage2.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_MessageSendButtonActionPerformed
@@ -1366,229 +1278,24 @@ public class tabpannedUserPage extends javax.swing.JFrame {
     private void InviteButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InviteButton2ActionPerformed
         // TODO add your handling code here:
         String user = (String) UserNameComboBox.getSelectedItem();
-        String sharingtime = sharingtimeTextField.getText();
-
-        int row = jTable1.getSelectedRow();
-
-        if (!user.equals("Please Select...") && row != -1 && !sharingtime.isEmpty()) {
-            int stime = Integer.parseInt(sharingtime);
-            if ((stime / 10) <= (get_points_available()/2)) {
-                int bid = (int) jTable1.getModel().getValueAt(row, 0);
-                InserttoInvitationTable(user, bid, stime);
-                JOptionPane.showMessageDialog(null, "Invitation sent to " + user);
-            } else {
-                JOptionPane.showMessageDialog(null, "Seems like you don't have enough points to share.", "Warning", JOptionPane.WARNING_MESSAGE);
-
-            }
-            sharingtimeTextField.setText("");
-            UserNameComboBox.setSelectedItem("Please Select...");
-            //JOptionPane.showMessageDialog(null, "user: " + user + ",  bid: " + bid + ", time sharing: " + stime);
+        if (!user.equals("Please Select...")) {
+            JOptionPane.showMessageDialog(null, user);
         } else {
-            JOptionPane.showMessageDialog(null, "Please select the valid user and fill out the time you want to share.\nSelect the book.");
+            JOptionPane.showMessageDialog(null, "Please select the valid user.");
         }
 
     }//GEN-LAST:event_InviteButton2ActionPerformed
 
-    private void InserttoInvitationTable(String user, int bid, int stime) {
-        DbConnector dbc = new DbConnector();
-        Connection conn = dbc.Connects();
-        String sql = "INSERT INTO INVITATION (inviter, invitee, bookid, sharing_points, Status) "
-                + "VALUES (?, ?, ?, ?, ?)";//, ?, ?, " + 0 + ")";
-
-        PreparedStatement stmt;
-        try {
-            stmt = conn.prepareStatement(sql);
-            stmt.setString(1, username);
-            stmt.setString(2, user);
-            stmt.setInt(3, bid);
-            stmt.setInt(4, stime);
-            stmt.setString(5, "Pending");
-            stmt.execute();
-        } catch (SQLException ex) {
-            Logger.getLogger(tabpannedUserPage.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
     private void RefreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshButtonActionPerformed
         // TODO add your handling code here:
-        populateReviewtable();
-        populateContributedTable();
-        populatependingContributedTable();
-        populateSentMessageTable();
-        populateReceiveMessageTable();
-        populateDropDownCombo();
-        populateUserDetails();
-        populateInvitationSentTable();
-        populateInvitationReceivedTable();
-        populateReadBookTable();
-
+        //cancel();
+        revalidate();
+        repaint();
+        //tabpannedUserPage tbU = new tabpannedUserPage(status, firstname, username);
+        //tbU.setVisible(true);
     }//GEN-LAST:event_RefreshButtonActionPerformed
 
-
-    private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
-        // TODO add your handling code here:
-        displaySummary();
-        populateReviewtable();
-    }//GEN-LAST:event_jTable1KeyPressed
-
-    private void AcceptInvitationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcceptInvitationButtonActionPerformed
-        // TODO add your handling code here:
-        accepting_Invitation();
-
-
-    }//GEN-LAST:event_AcceptInvitationButtonActionPerformed
-
-    private void DeclineInvitationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeclineInvitationButtonActionPerformed
-        // TODO add your handling code here:
-        int dialogResult = JOptionPane.showConfirmDialog(null, "Selecting Yes will delete the invitation from the list.\nDo you still want to decline the Invitation?", "Confirmation", JOptionPane.YES_NO_OPTION);
-//        ResultSet rs = null;
-//        PreparedStatement pst = null;
-//        String inviting_User = "";
-//        String invited_User = "";
-//        int bid = 0;
-//        int stime = 0;
-//
-//        String status = "";
-//        int rowNum = 0;
-//        DbConnector dbc = new DbConnector();
-//        Connection conn = dbc.Connects();
-//
-//        int row = InvitationReceivedTable.getSelectedRow();
-//
-//        if (row != -1) {
-//            //int 
-//            rowNum = (int) InvitationReceivedTable.getModel().getValueAt(row, 0);
-//
-////            work_on_InvitationTable(rowNum);
-//            String sql = "SELECT * FROM Invitation  WHERE IID = ?";
-    }//GEN-LAST:event_DeclineInvitationButtonActionPerformed
-
-    private void accepting_Invitation() {
-        ResultSet rs = null;
-        PreparedStatement pst = null;
-        String inviting_User = "";
-        String invited_User = "";
-        int bid = 0;
-        int stime = 0;
-
-        String status = "";
-        int rowNum = 0;
-        DbConnector dbc = new DbConnector();
-        Connection conn = dbc.Connects();
-
-        int row = InvitationReceivedTable.getSelectedRow();
-
-        if (row != -1) {
-            //int 
-            rowNum = (int) InvitationReceivedTable.getModel().getValueAt(row, 0);
-
-//            work_on_InvitationTable(rowNum);
-            String sql = "SELECT * FROM Invitation  WHERE IID = ?";
-            try {
-                pst = conn.prepareStatement(sql);
-                pst.setInt(1, rowNum);
-                //pst.setString(2, username);
-                rs = pst.executeQuery();
-                while (rs.next()) {
-                    inviting_User = rs.getString("inviter");
-                    invited_User = rs.getString("Invitee");
-                    bid = rs.getInt("bookid");
-                    stime = rs.getInt("sharing_points");
-                    status = rs.getString("status");
-
-                }
-
-            } catch (SQLException ex) {
-                Logger.getLogger(tabpannedUserPage.class.getName()).log(Level.SEVERE, null, ex);
-            }
-       // } 
-         if (status.equals("Accepted")) {
-            JOptionPane.showMessageDialog(null, "You can't accept twice");
-        } else {
-            deduct_points_of_inviter(inviting_User, stime);
-            insert_to_shared_book(inviting_User, bid, stime);
-            update_shared_book_status_in_invitation_table(rowNum);
-            populateInvitationReceivedTable();
-            JOptionPane.showMessageDialog(null, "Book has been accepted");
-        }
-    }
-        else {
-//            int row2 = InvitationSentTable.getSelectedRow();
-//            int rowNum = (int) InvitationSentTable.getModel().getValueAt(row2, 0);
-            JOptionPane.showMessageDialog(null, "Please select the book first.");
-            //work_on_InvitationTable(rowNum);
-        }
-    }
 //Helper functions
-
-
-    private void deduct_points_of_inviter(String inviter, int sharing_time) {
-        int new_point_balance = 0;
-//        int sharing_points = 0;
-        int old_point_balance = 0;
- //       ResultSet rs = null;
-        //PreparedStatement pst = null;
-        PreparedStatement pst2 = null;
-        DbConnector dbc = new DbConnector();
-        Connection conn = dbc.Connects();
-        //String getPointBalance_sql = "Select Point_balance From UserInfo Where username =?";
-
-        String sql = "UPDATE UserInfo SET Point_balance = ? WHERE Username = ?";
-        try {
-//            pst = conn.prepareStatement(getPointBalance_sql);
-//            pst.setString(1, inviter);
-//            rs = pst.executeQuery();
-//            while (rs.next()) {
-//                old_point_balance = rs.getInt("Point_balance");
-//            }
-            old_point_balance = get_points_available();
-            new_point_balance = (old_point_balance - (sharing_time/10));
-            pst2 = conn.prepareStatement(sql);
-            pst2.setInt(1, new_point_balance);
-            pst2.setString(2, inviter);
-            pst2.executeUpdate();
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(tabpannedUserPage.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void insert_to_shared_book(String inviter, int bookid, int shared_time) {
-        PreparedStatement pst = null;
-        DbConnector dbc = new DbConnector();
-        Connection conn = dbc.Connects();
-        String sql = "INSERT INTO SHAREDBOOKS (inviter, invitee, BookID, shared_time) "
-                + "VALUES (?, ?, ?, ?)";
-
-        try {
-            pst = conn.prepareStatement(sql);
-            pst.setString(1, inviter);
-            pst.setString(2, username);
-            pst.setInt(3, bookid);
-            pst.setInt(4, shared_time);
-            pst.execute();
-        } catch (SQLException ex) {
-            Logger.getLogger(tabpannedUserPage.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
-    private void update_shared_book_status_in_invitation_table(int Row_num) {
-        DbConnector dbc = new DbConnector();
-        Connection conn = dbc.Connects();
-        String sql = "UPDATE INVITATION SET Status = ? WHERE IID= ?";//, ?, ?, " + 0 + ")";
-
-        PreparedStatement stmt;
-        try {
-            stmt = conn.prepareStatement(sql);
-            stmt.setString(1, "Accepted");
-            stmt.setInt(2, Row_num);
-
-            stmt.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(tabpannedUserPage.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     private int get_user_reading_duration() {
         ResultSet rs = null;
         PreparedStatement pst = null;
@@ -1608,9 +1315,9 @@ public class tabpannedUserPage extends javax.swing.JFrame {
             while (rs.next()) {
                 read_duration = rs.getInt("reading_duration");
             }
-            conn.close();
+
         } catch (SQLException ex) {
-            Logger.getLogger(tabpannedUserPage.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(tabpannedUserPage2.class.getName()).log(Level.SEVERE, null, ex);
         }
         return read_duration;
 
@@ -1632,7 +1339,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
             BookContributedByUserTable.setEnabled(false);
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(tabpannedUserPage.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(tabpannedUserPage2.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -1703,9 +1410,8 @@ public class tabpannedUserPage extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-
     //BookPendingUserTable
-    private void populateReadBookTable() {
+    private void populateReadBookTable(){
         ResultSet rs = null;
         PreparedStatement pst = null;
 
@@ -1723,7 +1429,6 @@ public class tabpannedUserPage extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-
     private void populateInvitationSentTable() {
         ResultSet rs = null;
         PreparedStatement pst = null;
@@ -1733,19 +1438,10 @@ public class tabpannedUserPage extends javax.swing.JFrame {
             Connection conn = dbc.Connects();
             //int row = jTable1.getSelectedRow();
             //int rowNum = (int) jTable1.getModel().getValueAt(row, 0);
-            String Sql = "Select IID AS IID, invitee AS You_Invited,Bookid AS BOOK_ID, sharing_points AS SharedTime, status AS Shared_Status FROM INVITATION WHERE inviter = ?";
+            String Sql = "Select invitee AS You_Invited, sharing_points AS SharedPoints, accepted_invitation AS Shared_Status FROM INVITATION WHERE inviter = ?";
             pst = conn.prepareStatement(Sql);
             pst.setString(1, username);
             rs = pst.executeQuery();
-//            while (rs.next()) {
-//                if (rs.getBoolean("Shared_Status")) {
-//                    rs.toString().replace("true", "Accepted");
-//                    //rs.("Shared_Status", "Accepted");
-//                }else{
-//                    rs.toString().replace("false", "Declined");
-//                }
-//                    
-//            }
             InvitationSentTable.setModel(DbUtils.resultSetToTableModel(rs));
             InvitationSentTable.setEnabled(false);
             conn.close();
@@ -1763,17 +1459,12 @@ public class tabpannedUserPage extends javax.swing.JFrame {
             Connection conn = dbc.Connects();
             //int row = jTable1.getSelectedRow();
             //int rowNum = (int) jTable1.getModel().getValueAt(row, 0);
-            String Sql = "Select IID AS IID, inviter AS Invited_By, Bookid AS BOOK_ID, sharing_points AS SharedTime, status AS Shared_Status FROM INVITATION WHERE invitee = ?";
+            String Sql = "Select inviter AS Invited_By, sharing_points AS SharedPoints, accepted_invitation AS Shared_Status FROM INVITATION WHERE invitee = ?";
             pst = conn.prepareStatement(Sql);
             pst.setString(1, username);
             rs = pst.executeQuery();
-//            while (rs.next()) {
-//                if (rs.getBoolean("Shared_Status")) {
-//                    rs.updateString("Shared_Status", "Accepted");
-//                }
-//            }
             InvitationReceivedTable.setModel(DbUtils.resultSetToTableModel(rs));
-            //InvitationReceivedTable.setEnabled(false);
+            InvitationReceivedTable.setEnabled(false);
             conn.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -1834,7 +1525,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
     private void displaySummary() {
         ResultSet rs = null;
         PreparedStatement pst = null;
-        //SummaryTextArea.setText("");
+        SummaryTextArea.setText("");
 
         try {
             DbConnector dbc = new DbConnector();
@@ -1876,19 +1567,19 @@ public class tabpannedUserPage extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(tabpannedUserPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tabpannedUserPage2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(tabpannedUserPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tabpannedUserPage2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(tabpannedUserPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tabpannedUserPage2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(tabpannedUserPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tabpannedUserPage2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new tabpannedUserPage(status, firstname, username).setVisible(true);
+                new tabpannedUserPage2(status, firstname, username).setVisible(true);
             }
         });
 
@@ -1907,7 +1598,6 @@ public class tabpannedUserPage extends javax.swing.JFrame {
     private javax.swing.JButton BrowseCoverpageButton;
     private javax.swing.JButton CancelButton;
     private javax.swing.JButton ClearMessage;
-    private javax.swing.JButton DeclineInvitationButton;
     private javax.swing.JTextField EmailTextField;
     private javax.swing.JTextField FNameTextField;
     private javax.swing.JLabel FirstNameLabel;
@@ -1928,13 +1618,13 @@ public class tabpannedUserPage extends javax.swing.JFrame {
     private javax.swing.JButton RefreshButton;
     private javax.swing.JTable ReviewDisplayTable;
     private javax.swing.JTable SentMessageTable;
-    private javax.swing.JTabbedPane SharedBooksTab;
     private javax.swing.JLabel StatusLabel;
     private javax.swing.JTextArea SummaryTextArea;
     private javax.swing.JLabel UploadBookLabel;
     private javax.swing.JLabel UploadcoverPageLabel;
     private javax.swing.JComboBox UserNameComboBox;
     private javax.swing.JLabel UserNametobePosted;
+    private javax.swing.JTabbedPane UserProfileTab1;
     private javax.swing.JTextField UserTypeTextField;
     private javax.persistence.EntityManager UsersRegistrationPUEntityManager;
     private java.util.List<ebooksharing1.Bookinfo> bookinfoList1;
@@ -1943,14 +1633,12 @@ public class tabpannedUserPage extends javax.swing.JFrame {
     private javax.swing.JLabel coverpagepathprint;
     private javax.swing.JLabel coverpagepathprintLabel;
     private javax.swing.JTextField gotComplaintTextField;
-    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -1958,7 +1646,6 @@ public class tabpannedUserPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
@@ -1974,13 +1661,10 @@ public class tabpannedUserPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
-    private javax.swing.JScrollPane jScrollPane13;
-    private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1990,10 +1674,7 @@ public class tabpannedUserPage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTextField pointsTextField;
-    private javax.swing.JTextField sharingtimeTextField;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
